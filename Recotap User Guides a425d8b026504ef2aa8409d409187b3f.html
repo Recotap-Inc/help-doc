@@ -1,0 +1,671 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Recotap User Guides</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="a425d8b0-2650-4ef2-aa84-09d409187b3f" class="page sans"><header><img class="page-cover-image" src="Recotap%20User%20Guides%20a425d8b026504ef2aa8409d409187b3f/Recotap_Knowledgebase_cover_(2).png" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="https://cdn.dribbble.com/users/1205147/screenshots/6962541/flipping_book2.gif"/></div><h1 class="page-title">Recotap User Guides</h1></header><div class="page-body"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="93e2e8cb-c4f0-4ba9-aaef-d1265e107239"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Welcome to Recotap&#x27;s Help Center! The all-in-one place to find answers to all things Recotap. Can&#x27;t find what you&#x27;re looking for? Give us a shout at <mark class="highlight-orange">support@recotap.com</mark></div></figure><h2 id="a218427b-2085-4fa6-a04e-db034447e669" class="">Onboarding</h2><hr id="514150a2-0c94-40de-8bdf-c4136a9cb96e"/><div id="959e1340-5653-4653-8f8d-a870c320e0dd" class="column-list"><div id="a45099e0-2013-4b59-9917-62d70b208665" style="width:50.000000000000014%" class="column"><figure id="51137154-cac6-475c-b810-bf62a23b4a23" class="link-to-page"><a href="Recotap%20User%20Guides%20a425d8b026504ef2aa8409d409187b3f/Getting%20Started%2051137154cac6475cb810bf62a23b4a23.html"><img class="icon" src="https://i.pinimg.com/originals/92/96/f7/9296f70fce1ae3f298e0d085c17f6a3f.gif"/>Getting Started</a></figure><figure id="5b82ec3e-eac9-40ac-9225-a5e2adeb3bf9" class="link-to-page"><a href="Recotap%20User%20Guides%20a425d8b026504ef2aa8409d409187b3f/Platform%20Tutorials%205b82ec3eeac940ac9225a5e2adeb3bf9.html"><img class="icon" src="https://i.pinimg.com/originals/43/3d/83/433d83f7e481f35245f8c6bb7c7591d8.gif"/>Platform Tutorials</a></figure><figure id="07469d77-a236-41d0-907e-7f9cb55e5bca" class="link-to-page"><a href="Recotap%20User%20Guides%20a425d8b026504ef2aa8409d409187b3f/Hubspot%20Email%20Click%20tracking%20setup%2007469d77a23641d0907e7f9cb55e5bca.html"><img class="icon" src="https://images.ctfassets.net/lzny33ho1g45/5T0ULxlVTnhT7aKmmKXWPM/3782d5c89ec39c0bc9f1fc58ad64164d/app-tips-hubspot-00-hero.png?w=1520&amp;fm=jpg&amp;q=30&amp;fit=thumb&amp;h=760"/>Hubspot Email Click tracking setup</a></figure><figure id="fa942bbb-6bdb-4139-bce4-d278023dfb0c" class="link-to-page"><a href="Recotap%20User%20Guides%20a425d8b026504ef2aa8409d409187b3f/How%20to%20provide%20Facebook%20Ad%20creation%20access%20fa942bbb6bdb4139bce4d278023dfb0c.html"><img class="icon" src="https://zellusmarketing.com/wp-content/uploads/2021/03/icon-2.7s-326px-1.gif"/>How to provide Facebook Ad creation access?</a></figure><figure id="5c8dcef4-a899-44de-a5f6-71fcdd923b0a" class="link-to-page"><a href="Recotap%20User%20Guides%20a425d8b026504ef2aa8409d409187b3f/Google%20Conversion%20Tracking%20Pixel%20setup%205c8dcef4a89944dea5f671fcdd923b0a.html"><img class="icon" src="Recotap%20User%20Guides%20a425d8b026504ef2aa8409d409187b3f/Google%20Conversion%20Tracking%20Pixel%20setup%205c8dcef4a89944dea5f671fcdd923b0a/image_processing20210429-23263-ouip9.gif"/>Google Conversion Tracking Pixel setup</a></figure></div><div id="c9a245ab-fdd7-4dda-8596-845933b940e8" style="width:50%" class="column"><figure id="c08e6de9-4ba7-4215-87d4-1f15ca33b952" class="link-to-page"><a href="Recotap%20User%20Guides%20a425d8b026504ef2aa8409d409187b3f/Ad%20creatives%20specifications%20c08e6de94ba7421587d41f15ca33b952.html"><img class="icon" src="https://media4.giphy.com/media/2ZXwdhSx6lWwWkTzE6/200w.gif?cid=82a1493bl6k2msecf3i08bqg24wtncsavd466lqbr82dctk9&amp;rid=200w.gif&amp;ct=g"/>Ad creatives specifications</a></figure><figure id="662561fa-a27a-42d9-9694-bba4a99c0b0b" class="link-to-page"><a href="Recotap%20User%20Guides%20a425d8b026504ef2aa8409d409187b3f/Ideal%20Customer%20Profile%20Template%20662561faa27a42d99694bba4a99c0b0b.html"><img class="icon" src="https://cdn.dribbble.com/users/4179244/screenshots/7430038/media/34d6717bbdde1e753889d3625fb16e29.gif"/>Ideal Customer Profile Template</a></figure><figure id="795c5ae4-0e65-4130-9776-44b40067942c" class="link-to-page"><a href="Recotap%20User%20Guides%20a425d8b026504ef2aa8409d409187b3f/How%20to%20provide%20LinkedIn%20ad%20creation%20access%20795c5ae40e654130977644b40067942c.html"><img class="icon" src="https://i.pinimg.com/originals/de/b4/6f/deb46f02a59e3b3a2aa58fac16290d63.gif"/>How to provide LinkedIn ad creation access?</a></figure><figure id="fcb95481-49f7-4420-8e9b-7c3c52d3f60b" class="link-to-page"><a href="Recotap%20User%20Guides%20a425d8b026504ef2aa8409d409187b3f/How%20to%20provide%20Twitter%20Ad%20creation%20access%20fcb9548149f744208e9b7c3c52d3f60b.html"><img class="icon" src="https://assets.materialup.com/uploads/c693efe4-c52b-4ef8-80ae-4ff4d879868c/preview.gif"/>How to provide Twitter Ad creation access?</a></figure><figure id="46aed8e8-adea-49ac-b103-3e9fbdac200c" class="link-to-page"><a href="Recotap%20User%20Guides%20a425d8b026504ef2aa8409d409187b3f/How%20to%20Add%20Recotap%20SDK%20to%20your%20website%20using%20Googl%2046aed8e8adea49acb1033e9fbdac200c.html"><img class="icon" src="Recotap%20User%20Guides%20a425d8b026504ef2aa8409d409187b3f/How%20to%20Add%20Recotap%20SDK%20to%20your%20website%20using%20Googl%2046aed8e8adea49acb1033e9fbdac200c/o_1ebo7h0gt11ee3i7j764evn52a.jpg"/>How to Add Recotap SDK to your website using Google Tag Manager (GTM)</a></figure></div></div><h2 id="63554d3a-3825-447b-943e-259ff4c7e69e" class="">Integrations</h2><hr id="251ee1f5-9c2f-4dda-8185-4d8a6647f6f9"/><div id="b2108f1a-13b8-4b49-b4d1-e0bcbb0e5783" class="column-list"><div id="d3f3da60-0f90-4c67-a9cf-2a8de2c24a96" style="width:50%" class="column"><figure id="3fbaf20b-0e97-4703-893c-6ada5920cccc" class="link-to-page"><a href="Recotap%20User%20Guides%20a425d8b026504ef2aa8409d409187b3f/HubSpot%20Integration%203fbaf20b0e974703893c6ada5920cccc.html"><img class="icon" src="https://images.ctfassets.net/lzny33ho1g45/5T0ULxlVTnhT7aKmmKXWPM/3782d5c89ec39c0bc9f1fc58ad64164d/app-tips-hubspot-00-hero.png?w=1520&amp;fm=jpg&amp;q=30&amp;fit=thumb&amp;h=760"/>HubSpot Integration</a></figure><figure id="eafe2d9d-e71d-4d34-a5b4-50dd7636067e" class="link-to-page"><a href="Recotap%20User%20Guides%20a425d8b026504ef2aa8409d409187b3f/FreshSales%20Integration%20eafe2d9de71d4d34a5b450dd7636067e.html"><img class="icon" src="Recotap%20User%20Guides%20a425d8b026504ef2aa8409d409187b3f/FreshSales%20Integration%20eafe2d9de71d4d34a5b450dd7636067e/output-onlinegiftools.gif"/>FreshSales Integration</a></figure><p id="24f82745-3825-42cb-82cc-3eb4836bc119" class="">
+</p></div><div id="abed546d-6b2d-43ab-b5ae-61916f510748" style="width:50%" class="column"><figure id="9e4d0805-17f1-4ca1-ae91-f8539c2a1b2b" class="link-to-page"><a href="Recotap%20User%20Guides%20a425d8b026504ef2aa8409d409187b3f/Salesforce%20Integration%209e4d080517f14ca1ae91f8539c2a1b2b.html"><img class="icon" src="https://c.neevacdn.net/image/fetch/s--53wDIGPR--/https%3A//cdn.dribbble.com/users/28455/screenshots/2097226/analytics-watch-icon.gif"/>Salesforce Integration</a></figure><figure id="2719e292-242c-4760-a749-d2455e5f1e72" class="link-to-page"><a href="Recotap%20User%20Guides%20a425d8b026504ef2aa8409d409187b3f/Marketo%20Integration%202719e292242c4760a749d2455e5f1e72.html"><img class="icon" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.dribbble.com%2Fusers%2F50261%2Fscreenshots%2F6359620%2Fmarketo.gif&amp;f=1&amp;nofb=1"/>Marketo Integration</a></figure></div></div><h2 id="568f7864-991d-404f-9720-2b377fbace19" class="">Identify</h2><hr id="c6438f6f-6b54-45a7-8481-a798d46dcba3"/><div id="7fdc51a8-7c06-4b99-b353-ae99fb61e0ef" class="column-list"><div id="5e53d883-7a21-495f-a252-15ad4c05a0c6" style="width:50%" class="column"><figure id="479169d3-76e7-435e-993e-d1d4264d8f03" class="link-to-page"><a href="Recotap%20User%20Guides%20a425d8b026504ef2aa8409d409187b3f/Account%20Bulk%20Upload%20479169d376e7435e993ed1d4264d8f03.html"><img class="icon" src="https://cdn.dribbble.com/users/1537787/screenshots/5368307/graphic_scene_animation_-_building.gif"/>Account Bulk Upload</a></figure></div><div id="1e353860-83f7-4476-838d-5b72b53d9479" style="width:50%" class="column"><figure id="311fc93e-0b56-4f44-b6b9-bc3f6cf33462" class="link-to-page"><a href="Recotap%20User%20Guides%20a425d8b026504ef2aa8409d409187b3f/Audience%20Contact%20People%20Bulk%20Upload%20311fc93e0b564f44b6b9bc3f6cf33462.html"><img class="icon" src="https://i.pinimg.com/originals/8f/dd/5f/8fdd5fa1220f560f638f835fcf7a9230.gif"/>Audience/Contact/People Bulk Upload</a></figure></div></div><h2 id="4367daec-8ced-4e90-a83b-f3146082efef" class="">Target</h2><hr id="6d8e121f-cf4a-42a9-a0c6-b40c775013b9"/><div id="eea68f17-0ddf-4b6b-82ea-18ec82c04fc2" class="column-list"><div id="5155c57f-267d-453e-91f2-af82342d9db7" style="width:50%" class="column"><figure id="fc7373ff-a2c9-4780-ac19-1e234cceac43" class="link-to-page"><a href="Recotap%20User%20Guides%20a425d8b026504ef2aa8409d409187b3f/Campaign%20creation%20fc7373ffa2c94780ac191e234cceac43.html"><img class="icon" src="https://d34u8crftukxnk.cloudfront.net/slackpress/prod/sites/6/LOB-Marketing%402x.gif"/>Campaign creation</a></figure></div><div id="a82fca74-74bf-4de7-8dd7-81175a238349" style="width:50%" class="column"><figure id="ba6b2940-849d-4c75-8037-3dfdddfd9c19" class="link-to-page"><a href="Recotap%20User%20Guides%20a425d8b026504ef2aa8409d409187b3f/Creative%20Personalisation%20ba6b2940849d4c7580373dfdddfd9c19.html"><img class="icon" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmir-s3-cdn-cf.behance.net%2Fproject_modules%2Fmax_1200%2Fe6246741148583.579b707e404a1.gif"/>Creative Personalisation </a></figure></div></div><h2 id="e51d6661-6d9a-4df1-bfcd-e2780e4a4486" class="">Engage</h2><hr id="6b030955-4f70-4f81-946c-8f552ab7bbdc"/><div id="4dde4658-67a5-4811-9f86-1dea8c82e56c" class="column-list"><div id="fa9ff602-9482-4b63-92de-32847202c298" style="width:50%" class="column"><figure id="1df4c7a5-77cf-408e-afb5-5a89e188156c" class="link-to-page"><a href="Recotap%20User%20Guides%20a425d8b026504ef2aa8409d409187b3f/Account-Based%20Personalization%20Variables%201df4c7a577cf408eafb55a89e188156c.html"><img class="icon" src="https://i.pinimg.com/originals/c0/d3/03/c0d303ad96d5e17acadf3eafb4a6154a.gif"/>Account-Based Personalization Variables</a></figure></div><div id="68c35e0e-cbd4-4a43-a692-bc5eaec6ccc5" style="width:50%" class="column"><figure id="3ce3a6ff-fef9-4aa2-b54d-2b8a9d72e12d" class="link-to-page"><a href="Recotap%20User%20Guides%20a425d8b026504ef2aa8409d409187b3f/Engagement%20Score%20Metrics%203ce3a6fffef94aa2b54d2b8a9d72e12d.html"><img class="icon" src="Recotap%20User%20Guides%20a425d8b026504ef2aa8409d409187b3f/Engagement%20Score%20Metrics%203ce3a6fffef94aa2b54d2b8a9d72e12d/download_(1).png"/>Engagement Score Metrics</a></figure></div></div><h2 id="1096ec34-f1ac-4f5a-837b-8eb920a2a8f6" class="">Data</h2><hr id="c9059e4e-d9c4-4208-8eaf-5044fc7e1ded"/><figure id="3e13a308-69fd-4862-8067-1b4583369a24" class="link-to-page"><a href="Recotap%20User%20Guides%20a425d8b026504ef2aa8409d409187b3f/Discover%20Accounts%20-%20Data%20Spec%203e13a30869fd486280671b4583369a24.html"><img class="icon" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.dribbble.com%2Fusers%2F1518775%2Fscreenshots%2F4179952%2Fhdg_illustration_loop.gif&amp;f=1&amp;nofb=1"/>Discover Accounts - Data Spec</a></figure><p id="ee0509ac-942e-4fcb-a564-63c889d175d6" class="">
+</p></div></article></body></html>

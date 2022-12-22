@@ -1,0 +1,735 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Salesforce Integration</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="9e4d0805-17f1-4ca1-ae91-f8539c2a1b2b" class="page serif"><header><img class="page-cover-image" src="Marketo%20Integration%202719e292242c4760a749d2455e5f1e72/Recotap_Knowledgebase_cover_(2).png" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="https://c.neevacdn.net/image/fetch/s--53wDIGPR--/https%3A//cdn.dribbble.com/users/28455/screenshots/2097226/analytics-watch-icon.gif"/></div><h1 class="page-title">Salesforce Integration</h1></header><div class="page-body"><p id="41e98de8-a2b6-437d-aec4-8bcf8606619a" class="">
+</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="66b9d2fa-6e20-491f-8aef-5ea78e82daaf"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">The bi-directional integration with Salesforce enables you to import <strong><mark class="highlight-orange">Contact</mark></strong>/<strong><mark class="highlight-orange">Account</mark></strong> data into Recotap as well as export <strong><mark class="highlight-orange">Contact &amp; Account</mark></strong> insights to Salesforce. </div></figure><p id="26095b5e-319b-476d-9211-43fbc188c225" class="">
+</p><nav id="c1614c6d-d131-4052-81b4-ee75db0faa29" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#bd49c216-09ac-4ba2-9202-f4a363231943">Outline</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#e14e2684-769b-49b1-90a4-2448cd5021ed"><strong>How To Connect Your Salesforce Account With Recotap?</strong></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#dca310bd-f139-4b15-a6b3-d307fb1e1e0a"><strong>Understanding The Salesforce Integration Screen In Recotap</strong></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#b3e19e9b-d04b-4f51-98a3-365dae8084e2">1. Settings</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#e7bfce22-2a3b-4bac-9acd-d8c63f6b5e29">A) <strong>How To Import Contacts From Salesforce To Recotap?</strong></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#7a6791c5-1d81-43ee-93b6-833923e89b25">B) <strong>Actions That Can Be Taken On A Rule</strong></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#5c657afc-9e42-4cd7-a16e-6d7a255ebcee">C) <strong>How To Export People Insights From Recotap Into Salesforce?</strong></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#cec226ea-3b10-4a45-be14-b4a46d85a593">D) <strong>How To Import Leads From Salesforce To Recotap?</strong></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#c115fbeb-2f3b-4919-a5dd-a767ab1b76dc">E) <strong>Actions That Can Be Taken On A Rule</strong></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#6a7fe32c-2472-484e-8b78-9ac54c9e9ce5">F) <strong>How To Export Leads Insights From Recotap Into Salesforce?</strong></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#b9ed1add-9aa3-40b2-bd9e-52db96e851b3">G) <strong>How To Import Accounts From Salesforce To Recotap?</strong></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#7750963e-da1e-4059-8a5a-742eacdc667a">H) <strong>Actions That Can Be Taken On A Rule</strong></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#24e98f08-167c-4652-b117-7c048efdac1c">I) <strong>How To Export Accounts Insights From Recotap Into Salesforce?</strong></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#e6d6b755-3e12-48e5-ade5-11cf25d23d26">2. Field Mapping</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#15f0b39f-ef48-425d-b894-15ce482af90f">A) <strong>How To Map A Field?</strong></a></div></nav><h2 id="bd49c216-09ac-4ba2-9202-f4a363231943" class="">Outline</h2><p id="cf6d8c9c-a414-4ed3-b01e-616c66ebc40c" class="">The Salesforce Integration for Recotap connects your Salesforce org to the Recotap platform to power your account-based strategy. The Salesforce integration is bi-directional and allows you to:</p><ul id="d7b12f33-1d47-4352-9183-242e4164afc2" class="bulleted-list"><li style="list-style-type:disc">Import contacts, leads, and accounts from Salesforce easily into Recotap to run advertising campaigns.</li></ul><ul id="d859c5a8-4aa8-46f0-86e5-06f810288507" class="bulleted-list"><li style="list-style-type:disc">Push Recotap-generated engagement data from Recotap to Salesforce, allowing your sales team to track how different accounts engage with the advertising campaigns and which accounts show intent.</li></ul><p id="a645edeb-79a4-47fd-8275-ad038b5b132f" class=""><em>Please note that you can only connect one Salesforce account per Team in Recotap.</em></p><p id="d40e9f35-e580-420b-a646-0c7bc4438427" class=""><strong>In this article:</strong></p><ul id="1d2763cb-5b8c-4c0f-82b1-65c0f6acc44c" class="bulleted-list"><li style="list-style-type:disc">How To Connect Your Salesforce Account With Recotap?</li></ul><ul id="1e451c33-561d-484c-ac11-ee7fc9760209" class="bulleted-list"><li style="list-style-type:disc">Understanding The Salesforce Integration Screen In Recotap</li></ul><h2 id="e14e2684-769b-49b1-90a4-2448cd5021ed" class=""><strong>How To Connect Your Salesforce Account With Recotap?</strong></h2><p id="40eade55-ca99-44e5-858f-bc362d121e4d" class=""><strong>Step 1: </strong>Click “Settings” from the left menu of your Recotap dashboard. Select “Integrations” from the drop-down menu that appears.</p><p id="cabb7814-efa0-4670-b47a-b6c3bddcabe7" class="">
+</p><figure id="f460db1a-45eb-4a5c-9815-69a1d0ec5bcc" class="image"><a href="https://lh3.googleusercontent.com/vExfUB_sC9BQ2_sIYMNgKyG_dwwjR3WNVgZmjIPYVuJaj6j30aGNpJkHTnIdqbXpqI6ycSSl2YxMgchA_tAOeiq6eFDzjmdh42khyoU8sctoKjRte_gpy3KZh8E0nHvJoBmy38N9S9-6pzr411kCaDzBdijoH1qXSN1itM_KZaenuqK1oxTxq0gZhjmQ9A"><img src="https://lh3.googleusercontent.com/vExfUB_sC9BQ2_sIYMNgKyG_dwwjR3WNVgZmjIPYVuJaj6j30aGNpJkHTnIdqbXpqI6ycSSl2YxMgchA_tAOeiq6eFDzjmdh42khyoU8sctoKjRte_gpy3KZh8E0nHvJoBmy38N9S9-6pzr411kCaDzBdijoH1qXSN1itM_KZaenuqK1oxTxq0gZhjmQ9A"/></a></figure><p id="a5341ef6-1dd1-4a95-8f6f-a5a0b588f91b" class="">
+</p><p id="c23edda0-82ab-4fea-914c-753090a4a892" class=""><strong>Step 2: </strong>Click “Install” below Salesforce.</p><p id="d0951533-d629-4a41-9a3d-db5b2ff7ce1c" class="">
+</p><figure id="a95d2f31-3aa7-45aa-8918-083be9ba6022" class="image"><a href="https://lh6.googleusercontent.com/Rn7en0MPK4JnBAUrpNGPtwpThULxTsoP1hoV56q8SB5_cTVZWpsW68YYkUkrIwIk79tj-9JX2BwRBEdE1DeUE1R8I3fsewTEQ21eGEDLGcmf4XSbwu95SM3rUp2XuW_y83vCh_lwB0HbJ89QrFkTd2JYTiwjEIR7Zshuq3uV_U67Rk4CwR0u5gkKELlj4g"><img src="https://lh6.googleusercontent.com/Rn7en0MPK4JnBAUrpNGPtwpThULxTsoP1hoV56q8SB5_cTVZWpsW68YYkUkrIwIk79tj-9JX2BwRBEdE1DeUE1R8I3fsewTEQ21eGEDLGcmf4XSbwu95SM3rUp2XuW_y83vCh_lwB0HbJ89QrFkTd2JYTiwjEIR7Zshuq3uV_U67Rk4CwR0u5gkKELlj4g"/></a></figure><p id="58eb1011-b0f1-476c-9676-a8aaa551390c" class="">
+</p><p id="b8a82866-0c1a-445e-a9df-b7e5eb89ab0d" class=""><strong>Step 3: </strong>Click “Connect.” This will take you to the Salesforce login page.</p><p id="2d507793-9b9b-46b1-a3b0-87de2a49f8ae" class="">
+</p><figure id="b7d25c5b-a825-418e-a1c4-6d965c9f36c9" class="image"><a href="https://lh4.googleusercontent.com/CQQFlwvZAD4zt12JO-YaUS3B4hCkKpU7oOf_GqAx14YC6ujG8x_DKK4rDsqvFt48FrPVwoUO5c2EF6QeirmUNk6OHllaTwG4vwTuT6leRLBx7rDvoD7L7my8MmUPkylLVPaYavEBvH9yuOoqNWCUVnn42fV6Cn1XS2UJngHyGe8863jm6d3_6RFrIovl7w"><img src="https://lh4.googleusercontent.com/CQQFlwvZAD4zt12JO-YaUS3B4hCkKpU7oOf_GqAx14YC6ujG8x_DKK4rDsqvFt48FrPVwoUO5c2EF6QeirmUNk6OHllaTwG4vwTuT6leRLBx7rDvoD7L7my8MmUPkylLVPaYavEBvH9yuOoqNWCUVnn42fV6Cn1XS2UJngHyGe8863jm6d3_6RFrIovl7w"/></a></figure><p id="2e3d4f65-44d6-49f8-8ca8-9f0dfeeb8642" class="">
+</p><p id="6bf46e0e-9be0-4d2e-9001-65028f91b065" class=""><strong>Step 4: </strong>Enter your Salesforce Username and Password and select “Log In.”</p><p id="455e87c0-2111-4c97-af64-1c3e03f90d84" class="">
+</p><figure id="6c630c5a-9d9e-40a9-9aa7-fa5a3cb34633" class="image"><a href="https://lh6.googleusercontent.com/qDSWIVFF4CLPIgzaRWiB6xkarsuEOP9VI8-1cwGW1Fm9VH2rEp_lqa-Jv2G9dFJ1Kmzg5qWzxDEc0KGBmhgi2rgN6cHtbAZ9vNppY2ksgQ-2-6idmyCZmnsG2Gi6N1vDzicXNVaLGbWw2KfO74QHls32rtUk7quTGapInUMYlil7v0kKRCjHz__lpM0akA"><img src="https://lh6.googleusercontent.com/qDSWIVFF4CLPIgzaRWiB6xkarsuEOP9VI8-1cwGW1Fm9VH2rEp_lqa-Jv2G9dFJ1Kmzg5qWzxDEc0KGBmhgi2rgN6cHtbAZ9vNppY2ksgQ-2-6idmyCZmnsG2Gi6N1vDzicXNVaLGbWw2KfO74QHls32rtUk7quTGapInUMYlil7v0kKRCjHz__lpM0akA"/></a></figure><p id="481d5bbf-7813-4a3f-8e68-36c4301f6a58" class="">
+</p><p id="82c4f0b7-8a55-40c3-b426-17255b30b9eb" class=""><strong>Note:</strong> You may be asked to enter a verification code after entering your Salesforce Username and Password to complete the integration process.</p><p id="7099f56e-46ad-45e8-9d19-a8bc3ec049c0" class="">Now the integration is completed. You will be taken to the Recotap Integration dashboard, where you can see Salesforce under the “Installed” section. You can click on the edit icon (pencil icon) to configure your Salesforce integration.</p><p id="30340f7f-edc9-45ce-8c18-7d55505a7c49" class="">
+</p><figure id="692ab808-db50-46a5-a71a-473b2545034e" class="image"><a href="https://lh4.googleusercontent.com/I6awjScinsMS_Escz8DMYa40p1n2w2BCEL7_5ypLIzVC_IPXoWH4YoapU1nxM_RZMn7XzTPmHeCaCgdPh-ohi4L7TIcVIEqSo7YcazjN2wamEcW3Huq9tXb5FX9wKrHNx8-TPqyNrUOE7IlnEQL7enBz0rNtgnNBpo4L58_gS1n0oBlXPlz7_M8tdYsCMg"><img src="https://lh4.googleusercontent.com/I6awjScinsMS_Escz8DMYa40p1n2w2BCEL7_5ypLIzVC_IPXoWH4YoapU1nxM_RZMn7XzTPmHeCaCgdPh-ohi4L7TIcVIEqSo7YcazjN2wamEcW3Huq9tXb5FX9wKrHNx8-TPqyNrUOE7IlnEQL7enBz0rNtgnNBpo4L58_gS1n0oBlXPlz7_M8tdYsCMg"/></a></figure><p id="a755e057-2056-4dac-b28e-f28e9fac3f67" class="">
+</p><h2 id="dca310bd-f139-4b15-a6b3-d307fb1e1e0a" class=""><strong>Understanding The Salesforce Integration Screen In Recotap</strong></h2><h3 id="b3e19e9b-d04b-4f51-98a3-365dae8084e2" class="">1. Settings</h3><p id="bdeb1760-ef32-4b24-967d-5a89ee7cbca1" class="">The Settings screen helps you configure all the rules required for the bi-directional data exchange between Recotap and Salesforce for the following entities:</p><ol type="1" id="5cf2bfdb-a4d3-4bb7-a6a7-d9aa776173e2" class="numbered-list" start="1"><li>People</li></ol><ol type="1" id="4b564fee-c9b3-47f8-bd9c-f3b9eb5a17aa" class="numbered-list" start="2"><li>Leads</li></ol><ol type="1" id="881491a8-164d-49b6-828f-2d924ae553bf" class="numbered-list" start="3"><li>Accounts</li></ol><p id="036b2b5d-dbbf-4a57-a245-f2c7746616de" class="">You can choose to import one or all of the entities from Salesforce to Recotap. If you import People and Leads, then Accounts will automatically get imported. But if you just import Accounts, People and Leads will not get imported.</p><p id="e94b6fd9-4f8c-417c-a5b0-b1ae5035ab15" class="">
+</p><figure id="de2d4fc2-1ce2-42e9-9b96-31dbb04a0caf" class="image"><a href="https://lh5.googleusercontent.com/zn0RcX73Du9QVZmM6tUjRUMHvV8DIJrfOyfBUbbtV5PBjXch-znN9Ky2lUgh3GDarYfOci20Iga7Zs56XkNP5fqcZ5UqlF-52WpwZ140ooWvw7TBblVJByKtPGsDK2pXHc2hX9m7aZ9Bf-l3x4wrna4NSSHC5Uaiz_WrUIle8-AqxLw-5kFrKf-pVsW7eQ"><img src="https://lh5.googleusercontent.com/zn0RcX73Du9QVZmM6tUjRUMHvV8DIJrfOyfBUbbtV5PBjXch-znN9Ky2lUgh3GDarYfOci20Iga7Zs56XkNP5fqcZ5UqlF-52WpwZ140ooWvw7TBblVJByKtPGsDK2pXHc2hX9m7aZ9Bf-l3x4wrna4NSSHC5Uaiz_WrUIle8-AqxLw-5kFrKf-pVsW7eQ"/></a></figure><p id="595fcab8-ca21-41f2-94a8-13572d15528b" class="">
+</p><h3 id="e7bfce22-2a3b-4bac-9acd-d8c63f6b5e29" class="">A) <strong>How To Import Contacts From Salesforce To Recotap?</strong></h3><p id="f32817b3-4691-42b0-a419-5f378bdac144" class="">You can import your Salesforce Contacts into Recotap by adding a rule.</p><p id="8b809b3c-d88d-4d1a-b8e7-61484712df22" class=""><strong>Step 1: </strong>Select “Salesforce contact list” in the ADD RULE box. You can select the contact list(s) from the drop-down menu which you want to import into Recotap.</p><p id="f303119e-e712-4839-a627-79f382013553" class="">
+</p><figure id="c2d512bd-0951-4aa1-95a8-70e1f6f19077" class="image"><a href="https://lh6.googleusercontent.com/BkpKVYrYGi3G3bWRqmOVUmtDPdZeDHPOk-gD-xylwan2z8jBwp7bI5v6BKm54hwUL2vyiM1gsZYETJGYhV6ESp1oDbusFSSisXUumn2Zf2_sgYeFNMWWIoFxoCofHAFLhDrBm9YxghpXwCogonnLD3w5-sRD0BIji3rGmoyskXaU40zuDSkrQWR2Rx5C4g"><img src="https://lh6.googleusercontent.com/BkpKVYrYGi3G3bWRqmOVUmtDPdZeDHPOk-gD-xylwan2z8jBwp7bI5v6BKm54hwUL2vyiM1gsZYETJGYhV6ESp1oDbusFSSisXUumn2Zf2_sgYeFNMWWIoFxoCofHAFLhDrBm9YxghpXwCogonnLD3w5-sRD0BIji3rGmoyskXaU40zuDSkrQWR2Rx5C4g"/></a></figure><p id="42b5c296-ab61-4a5c-a9ae-ec806615faca" class="">
+</p><p id="87c77ef6-d0b4-4ac7-a0db-b4fb94350fce" class=""><strong>Step 2: </strong>Select a destination in Recotap from “People Only,” “New Segment,” or “Existing Segment” and click “Save.”</p><p id="a37bd328-d74f-4533-aef4-4085093cae4b" class="">
+</p><figure id="7fc97bc1-0786-4910-8f28-ff2cba878341" class="image"><a href="https://lh3.googleusercontent.com/KvwGj9qFFsRm2-Rg2a7rp6pQUwzKO22nbvVWMrt4JQ9d_9fjCDLN_oqcPmP6t77rS1bVfTyuxSAFtjk6ButlAVebI1i8Rmq5jgekG7Gn_tkBYypzued6YxJ8Jg9q3O9FlBvCcUCT1KZSaDA-EmiA3f2tX5mJBh57azP1OCHnWpd4-2oe8by1t5FIH1l5Rw"><img src="https://lh3.googleusercontent.com/KvwGj9qFFsRm2-Rg2a7rp6pQUwzKO22nbvVWMrt4JQ9d_9fjCDLN_oqcPmP6t77rS1bVfTyuxSAFtjk6ButlAVebI1i8Rmq5jgekG7Gn_tkBYypzued6YxJ8Jg9q3O9FlBvCcUCT1KZSaDA-EmiA3f2tX5mJBh57azP1OCHnWpd4-2oe8by1t5FIH1l5Rw"/></a></figure><p id="2148f01b-2d2e-4158-bda1-89fc51e6cc20" class="">
+</p><ul id="2b0a09a8-6c6d-4429-91d7-79f1bf10f7ab" class="bulleted-list"><li style="list-style-type:disc">Choose People Only when you wish to import contact list(s) generically into Recotap.</li></ul><ul id="2b43d90b-5d0a-43ed-a158-188cd578d5a2" class="bulleted-list"><li style="list-style-type:disc">Choose “New Segment” if you want to import your contacts into a new People Based Static or Audience Segment. If you select “New Segment” as the destination, you will have to create a new People Based Static segment. Click “Name your segment” to create a new segment. Add the name of the segment you wish to create and click “Save.” A new segment will be created, and your contact list(s) will be imported into the segment you just created.</li></ul><p id="14743352-b396-4a8c-a2c3-a8be9715ebf4" class="">
+</p><figure id="2d0761fc-04b2-4b86-b843-748c37f86297" class="image"><a href="https://lh6.googleusercontent.com/gRQlnrwBrxi2GUrvlBJp60PCR26fzddCAfFfrw7VOq-h5w_XXmJQrjtYuK5f0011fe9bT4D33M0lTQSH2ZxEd8TR0foWt1xBvxwBdEu6PYU7OdSKu8L-ZMDT8z2i0PfChGKyBAQAMWcnN8m845eq35hNUUhsYpnBiCEDnwVm6aEDWnnNKiZhU5jXpD0okA"><img src="https://lh6.googleusercontent.com/gRQlnrwBrxi2GUrvlBJp60PCR26fzddCAfFfrw7VOq-h5w_XXmJQrjtYuK5f0011fe9bT4D33M0lTQSH2ZxEd8TR0foWt1xBvxwBdEu6PYU7OdSKu8L-ZMDT8z2i0PfChGKyBAQAMWcnN8m845eq35hNUUhsYpnBiCEDnwVm6aEDWnnNKiZhU5jXpD0okA"/></a></figure><p id="f8b6271a-cc95-424d-b2d6-8ff7f2cc0fd0" class="">
+</p><ul id="1f979627-7bc0-4432-8b48-054cb2bd7276" class="bulleted-list"><li style="list-style-type:disc">Choose “Existing Segment” if you already have an existing People-Based Static Audience Segment created in Recotap and wish to import contacts in any of them. If you select “Existing Segment” as the destination, you will have to select an existing People Based Static segment to import your contact list(s). Click “Select Field” and choose the segment from the drop-down menu you want to import the contact list(s). Once done, click “Save.”</li></ul><p id="95e46dc6-df6e-4b16-8a5f-f47344f9a940" class="">
+</p><figure id="3df43ca0-8b4b-457c-a1f6-b049a93cc93a" class="image"><a href="https://lh3.googleusercontent.com/uVt8oMR10v5iZfFSDy-gNhSoQrRlR4A5Bd4va8mcSWnmxKaQi_sY0XG3y8ymOeoekS45hLeyz7hkV9bnbLmDZNhUpTVgCtwK2EEpIbJ-N5gflVMTRvgp-ifzo3am4K5aa8U0noXLBhq9T5q94uFwtIJl97CwItWb1Qdhj7FsJCwqgf7deQZdy3Rhf9Kmgg"><img src="https://lh3.googleusercontent.com/uVt8oMR10v5iZfFSDy-gNhSoQrRlR4A5Bd4va8mcSWnmxKaQi_sY0XG3y8ymOeoekS45hLeyz7hkV9bnbLmDZNhUpTVgCtwK2EEpIbJ-N5gflVMTRvgp-ifzo3am4K5aa8U0noXLBhq9T5q94uFwtIJl97CwItWb1Qdhj7FsJCwqgf7deQZdy3Rhf9Kmgg"/></a></figure><p id="944fd721-1e8c-4b54-ac08-3198ac97fbb5" class=""><strong>Note:</strong> If you cannot see the Salesforce contact list(s), it might be because you don’t have permission to view the list. In that case, you may ask your Salesforce administrator for the required permissions.</p><h3 id="7a6791c5-1d81-43ee-93b6-833923e89b25" class="">B) <strong>Actions That Can Be Taken On A Rule</strong></h3><p id="27daaee6-fe54-4c74-a4fa-0f2b84af2cd8" class="">Hover over the three-dot menu beside a Source or Destination in a Rule. You will get two options:</p><figure id="29c38911-4213-4455-ad4d-542c53c16c78" class="image"><a href="https://lh5.googleusercontent.com/Dr59094Wujbi8VPfOHIdVG0eeAetCtAVBLeXqZU7nN_Q8cDE_ASWowjnqTwWvmmU9YKVj9t63Jqn9XYfczrhgrqxPaXMmCm3eGy3QPp7jbiuSHEsU2GGs_XIQ0U2Q65-lx-KiIP9ej9kwGQBO3k9otsHGsb2Y-561XzzIh5Z-ioG17JIm8dRLwiw6V4H_Q"><img src="https://lh5.googleusercontent.com/Dr59094Wujbi8VPfOHIdVG0eeAetCtAVBLeXqZU7nN_Q8cDE_ASWowjnqTwWvmmU9YKVj9t63Jqn9XYfczrhgrqxPaXMmCm3eGy3QPp7jbiuSHEsU2GGs_XIQ0U2Q65-lx-KiIP9ej9kwGQBO3k9otsHGsb2Y-561XzzIh5Z-ioG17JIm8dRLwiw6V4H_Q"/></a></figure><p id="ef07f8b3-174f-410b-a259-54cfb5f6b338" class="">
+</p><ul id="29c3fec8-b06c-48dd-9e0d-06d0d9619f8f" class="bulleted-list"><li style="list-style-type:disc"><strong>Edit:</strong> If you want to edit a rule, click Edit. Now you can either add a new contact list(s) or delete an existing contact list(s). After making the changes, click “Update.”</li></ul><p id="ef915fec-8faf-48b4-be58-5bf249c6e8d3" class="">
+</p><figure id="78dd555c-2001-425b-b4f2-79543a6eab18" class="image"><a href="https://lh5.googleusercontent.com/opmyKH-i1shaUM6Ecuji_VAzcTXJpoPGFnxZ4v4tWSMG4j1Nq7EX120N38iJzrWE370YEM38DXsjS9k_X0kPnbQml6_YYLf5Nhn3ru8hxOfTO76WrVccajjj6pM5-zEFkhb4noZCEDfWn8S2Ga59zdWVMeSc7BQQZxYV1ZvpW8cTpmzi8qSqwKZ45lnDtA"><img src="https://lh5.googleusercontent.com/opmyKH-i1shaUM6Ecuji_VAzcTXJpoPGFnxZ4v4tWSMG4j1Nq7EX120N38iJzrWE370YEM38DXsjS9k_X0kPnbQml6_YYLf5Nhn3ru8hxOfTO76WrVccajjj6pM5-zEFkhb4noZCEDfWn8S2Ga59zdWVMeSc7BQQZxYV1ZvpW8cTpmzi8qSqwKZ45lnDtA"/></a></figure><p id="15f989d6-0970-4b64-870e-97cea1d2b442" class="">
+</p><ul id="79dd6fa0-29bd-4531-bce4-6c919b765707" class="bulleted-list"><li style="list-style-type:disc"><strong>De-Activate:</strong> If you want to delete a rule, click De-Activate, and the rule will disappear from your Recotap dashboard.</li></ul><p id="ae56330b-a4c8-4421-b130-f3ae7f1c2764" class="">
+</p><figure id="e4ca016a-8cb3-4655-97df-d9e88ec0e26b" class="image"><a href="https://lh4.googleusercontent.com/JMsrx_5D7lgbyGUTyAVanxreX0o13Y-uHqAxevh5STwocKMk-0X7JFJu_LF9JMiyKe7qQ3FFKcfyxMWRBwZ2Fo5X0-zA9E4Nx7ltiw7Rjk-enyNBUQ57rujVRl6QkOo7Mq34Vrf-ifX1q5Q_FyUmRQjBuRbXW43p5WeWeECPaRvCrqf6IWEHSNTHOowmmA"><img src="https://lh4.googleusercontent.com/JMsrx_5D7lgbyGUTyAVanxreX0o13Y-uHqAxevh5STwocKMk-0X7JFJu_LF9JMiyKe7qQ3FFKcfyxMWRBwZ2Fo5X0-zA9E4Nx7ltiw7Rjk-enyNBUQ57rujVRl6QkOo7Mq34Vrf-ifX1q5Q_FyUmRQjBuRbXW43p5WeWeECPaRvCrqf6IWEHSNTHOowmmA"/></a></figure><p id="25831d83-9cf6-4f76-8578-13b4778059e1" class="">
+</p><p id="b24d14b9-2a25-4305-9f41-5356cf2cb15d" class=""><strong>Note:</strong> Changes made to the People list in Recotap will not be re-written back into the Salesforce account.</p><h3 id="5c657afc-9e42-4cd7-a16e-6d7a255ebcee" class="">C) <strong>How To Export People Insights From Recotap Into Salesforce?</strong></h3><p id="d53dad6b-001e-49ff-863a-0579757c5071" class="">Recotap lets you export the Engagement Score of your contacts along with the Last Engagement Date to Salesforce.</p><p id="6234e886-c729-44d6-89a0-d6a5a565b291" class="">The setting for exporting the Engagement Score and Last Engagement Date of your contacts to Salesforce is enabled by default.</p><p id="0fd89ae8-2030-4f00-baa1-906ca21ae460" class="">
+</p><figure id="c6e29822-4bd7-4ed5-8473-3e9ec53073ad" class="image"><a href="https://lh5.googleusercontent.com/QprW3s8VRbE0awnwAftP_LSQFqGpbrBAwi-Nt8zxN7JTXnxI3BQszQF5ayzkSWQqgTgCUXdhtquqbf4CsO3bGU8ziofiQ5tACjR2luXy_YEnHjZBVSpZ9ZeY0tg1cqjZAFakLM-dsmYjjElOgxCoJRDRC7_Q8qwwZL_u_ch74l64y9FH5KJc3L6HEBlDdQ"><img src="https://lh5.googleusercontent.com/QprW3s8VRbE0awnwAftP_LSQFqGpbrBAwi-Nt8zxN7JTXnxI3BQszQF5ayzkSWQqgTgCUXdhtquqbf4CsO3bGU8ziofiQ5tACjR2luXy_YEnHjZBVSpZ9ZeY0tg1cqjZAFakLM-dsmYjjElOgxCoJRDRC7_Q8qwwZL_u_ch74l64y9FH5KJc3L6HEBlDdQ"/></a></figure><p id="9d70c43f-a401-466e-a55a-ea120d718f4e" class="">
+</p><p id="4be0071c-04f9-4184-a0f0-5000f5eb5dfb" class="">Select “Disabled” from the top right corner if you wish to disable this setting. The Export People Insights section will become inactive.</p><p id="816c7712-946e-49d8-a78f-8f8f966991df" class="">
+</p><figure id="0f162cec-3c9f-41fc-9ff1-da06e219eef1" class="image"><a href="https://lh6.googleusercontent.com/zSMTMxT-D4q60Wtpb8l044KPEDW3fRp24vC5vSIPzMt7DN2MH8UlGW5h9mnrNrdDV4ZQbduKazWbh44PrpNzgG3zmV4Pa6YNCpbt1SZyLpiykTG_rMICSVEoBHkkC4AcSrVu6-S3cqc2qoJ-KhVU4zlJeOenNPyyeSps7t7xpK3DyEgCQb_spAQn8vsZ6w"><img src="https://lh6.googleusercontent.com/zSMTMxT-D4q60Wtpb8l044KPEDW3fRp24vC5vSIPzMt7DN2MH8UlGW5h9mnrNrdDV4ZQbduKazWbh44PrpNzgG3zmV4Pa6YNCpbt1SZyLpiykTG_rMICSVEoBHkkC4AcSrVu6-S3cqc2qoJ-KhVU4zlJeOenNPyyeSps7t7xpK3DyEgCQb_spAQn8vsZ6w"/></a></figure><p id="cad1f7b1-773b-4176-9748-486ceffcad51" class=""><strong><em>Note: The Engagement Score is updated every 24 hours in your Salesforce account.</em></strong></p><p id="90157fa1-0219-4018-a3f4-cacff6ed5c91" class="">
+</p><h3 id="cec226ea-3b10-4a45-be14-b4a46d85a593" class="">D) <strong>How To Import Leads From Salesforce To Recotap?</strong></h3><p id="7c4442a7-646e-4be2-aaa2-718167d5a478" class="">You can import your Salesforce Leads into Recotap by adding a rule. Leads from Salesforce will be imported to the main People list or People Based Static Audience segment in Recotap.</p><p id="1dcd1194-118d-405d-88fd-eeb761360656" class=""><strong>Step 1: </strong>Select “Salesforce lead list” in the ADD RULE box. You can select the lead list(s) from the drop-down menu which you want to add in Recotap.</p><p id="0a229b48-e4e4-475c-937d-36aeaffbd653" class="">
+</p><figure id="78e9b5a8-ad07-43f0-a936-50fc38a135f5" class="image"><a href="https://lh6.googleusercontent.com/dATWqaNfUjFpSgtfL7dAV3AvHYs_BB4dQGwtkJf8vBCIwfmXoF2AMlclhFqLendYICR6nIsDkdyo3qH6ORjk7z0fbVUP-g4Tq3fejZOoOB4z31L8g1r7kXYht79nHHIG_KKGcyDO8wBGltrVsZ-YVo6azW6MyH4VsU71YF_iMzB-QQeBUmHp-9OfY8d6SQ"><img src="https://lh6.googleusercontent.com/dATWqaNfUjFpSgtfL7dAV3AvHYs_BB4dQGwtkJf8vBCIwfmXoF2AMlclhFqLendYICR6nIsDkdyo3qH6ORjk7z0fbVUP-g4Tq3fejZOoOB4z31L8g1r7kXYht79nHHIG_KKGcyDO8wBGltrVsZ-YVo6azW6MyH4VsU71YF_iMzB-QQeBUmHp-9OfY8d6SQ"/></a></figure><p id="9f0cec9c-4780-4c88-84c2-ee4b9a9c8ebe" class="">
+</p><p id="16ebeb39-414c-4d43-a17e-ed2c3e5b7c0d" class=""><strong>Step 2: </strong>Select a destination in Recotap from “People Only,” “New Segment,” or “Existing Segment” and click “Save.”</p><p id="26dcf020-c5a6-4890-8cea-d4290ca7b11a" class="">
+</p><figure id="85c9a1d5-9802-4950-b666-4cbd9d3b5626" class="image"><a href="https://lh5.googleusercontent.com/nmK3vG3TWMFHLfesPk4G4VLKIjhKylrzJCV5sHxtoAmtVe4a5XnyUuQdfJhA1OZwqA0O2NG2GYHtVDT_GXDta7VIcXkoKQLe9izv2TTzfrghMvdT_SudRgdeGRfdthU2XuzOjjrSo-YFqM6QjoqO6fuSD1q9IB678Brq3Y-jxi597vRYmyDKuF1hwoA3iQ"><img src="https://lh5.googleusercontent.com/nmK3vG3TWMFHLfesPk4G4VLKIjhKylrzJCV5sHxtoAmtVe4a5XnyUuQdfJhA1OZwqA0O2NG2GYHtVDT_GXDta7VIcXkoKQLe9izv2TTzfrghMvdT_SudRgdeGRfdthU2XuzOjjrSo-YFqM6QjoqO6fuSD1q9IB678Brq3Y-jxi597vRYmyDKuF1hwoA3iQ"/></a></figure><p id="39f2c38a-3043-4e87-b460-3ae35bf27fe4" class="">
+</p><ul id="ea069fe9-c1c9-447e-9a5e-48b37c10a275" class="bulleted-list"><li style="list-style-type:disc">Choose People Only when you wish to import lead list(s) generically into Recotap.</li></ul><ul id="f5bdbaaa-515e-4574-aa77-80abfd704654" class="bulleted-list"><li style="list-style-type:disc">Choose “New Segment” if you want to import your leads into a new People Based Static or Audience Segment. If you select “New Segment” as the destination, you will have to create a new segment. Click “Name your segment” to create a new segment. Add the name of the segment you wish to create and click “Save.” A new segment will be created, and your lead list(s) will be imported into the segment you just created.</li></ul><p id="a4b88d04-3155-41e8-b022-8cbffc3fcdde" class="">
+</p><figure id="3499bec7-c281-48a6-93a1-12c32f5e2fb5" class="image"><a href="https://lh4.googleusercontent.com/u_OVA831V5S4P-AoemQ3j8y98JEa6T7ly78p5NImvAQCpNRF2z0IJG3h0YOmtKxC7Yk50GzWX36PEVH6nr9L9l4-vCmKWfoLHCayRzadJKnutD2JlJbM73Q0xig6uaU9JVjUsC6gvzDwYzONV7YVQSj4ZsK0FVsQEUe7YYmeuLj-pKTVwVtw5q08OrHRQg"><img src="https://lh4.googleusercontent.com/u_OVA831V5S4P-AoemQ3j8y98JEa6T7ly78p5NImvAQCpNRF2z0IJG3h0YOmtKxC7Yk50GzWX36PEVH6nr9L9l4-vCmKWfoLHCayRzadJKnutD2JlJbM73Q0xig6uaU9JVjUsC6gvzDwYzONV7YVQSj4ZsK0FVsQEUe7YYmeuLj-pKTVwVtw5q08OrHRQg"/></a></figure><p id="8f62fb48-5a99-46fd-9576-bc045c9e3583" class="">
+</p><ul id="e020a5b9-ade0-413d-aec6-68fc28e29f4b" class="bulleted-list"><li style="list-style-type:disc">Choose “Existing Segment” if you already have an existing People-Based Static or Audience Segment created in Recotap and wish to import leads in any of them. If you select “Existing Segment” as the destination, you will have to select an existing segment to import your lead list(s). Click “Select Field” and choose the segment from the drop-down menu to which you want to import the lead list(s). Click “Save.”</li></ul><p id="d77b4fe6-78b2-4599-b39f-f885dddfb26f" class="">
+</p><figure id="35ac7be6-703c-48b7-a4f5-d8c45a6131b5" class="image"><a href="https://lh6.googleusercontent.com/CTG4nqZLdg1hy140l4WdI_Oaj-D4yS88fl9SYpDN4I6kP22jVekh4MY-0rmgRwGIyFxMV58xyUWwBf5dsbXIXrCa5QUwdA523ELhdiOOTWHqVCJzQLLe5WE_IwIPWDAJXIlZgRXNHgzzlTfY0kwLp98toO4ZlRzDQuonPGPYqahgKmcltxuDC_Rnpp4-NA"><img src="https://lh6.googleusercontent.com/CTG4nqZLdg1hy140l4WdI_Oaj-D4yS88fl9SYpDN4I6kP22jVekh4MY-0rmgRwGIyFxMV58xyUWwBf5dsbXIXrCa5QUwdA523ELhdiOOTWHqVCJzQLLe5WE_IwIPWDAJXIlZgRXNHgzzlTfY0kwLp98toO4ZlRzDQuonPGPYqahgKmcltxuDC_Rnpp4-NA"/></a></figure><p id="1c572cfa-fd75-4b98-abde-737beef8b9ca" class=""><em><strong>Note:</strong></em> <strong><em>If you cannot see the Salesforce lead list, it might be because you don’t have permission to view the list. In that case, you may ask your Salesforce administrator for the required permissions.</em></strong></p><h3 id="c115fbeb-2f3b-4919-a5dd-a767ab1b76dc" class="">E) <strong>Actions That Can Be Taken On A Rule</strong></h3><p id="31e89998-8c3d-430c-a59e-85d208a2127b" class="">Hover over the three-dot menu beside a Source or Destination in a Rule. You will get two options:</p><p id="058ceaf1-fb3e-48bb-bfa6-cd73aeb446f2" class="">
+</p><figure id="1e614857-3675-4541-9b80-5bbc5a8b7001" class="image"><a href="https://lh5.googleusercontent.com/HaoL0iJTi7cYCiE4fTjB_epNjCKkfqQLOFA0s9Z0LxZk5nfMZu6GdA0aHq-MDtdOeGLh60Yxytn8L5ctgPtmOckjxMpbKGgu02t9z3-grZyfOrj7rTqVJndLgL63JTgKo9DuFTOucVpVUNGW_AOCDmPBlS9LScHgjv4F6oZptgQGcbeROQxVf2dsStDBLQ"><img src="https://lh5.googleusercontent.com/HaoL0iJTi7cYCiE4fTjB_epNjCKkfqQLOFA0s9Z0LxZk5nfMZu6GdA0aHq-MDtdOeGLh60Yxytn8L5ctgPtmOckjxMpbKGgu02t9z3-grZyfOrj7rTqVJndLgL63JTgKo9DuFTOucVpVUNGW_AOCDmPBlS9LScHgjv4F6oZptgQGcbeROQxVf2dsStDBLQ"/></a></figure><p id="45626d35-d52b-4c7a-9747-fd8de2a3dae4" class="">
+</p><ul id="86c8e8e9-40c9-4d89-9b3c-abf65f104edd" class="bulleted-list"><li style="list-style-type:disc"><strong>Edit:</strong> If you want to edit a rule, click Edit. Now you can either add a new lead list(s) or delete an existing lead list(s). After making the changes, click “Update.”</li></ul><p id="6581fa80-eb54-4da8-9570-8e2aa5ec8ca8" class="">
+</p><figure id="6a6df73f-fe6b-42ba-9b6c-ec6a47e64893" class="image"><a href="https://lh5.googleusercontent.com/m-xSF7rGrlqOZNEKfC1wbMDPyVy2I2uOha6iJyDk0KcULB4V92yiR7quOvXu5jTdvWEk7TOrPf-KHF8OwQ5HPVRaho-a0F3_xp6SNWIIb_Vp1O2U4Mg9-Ml_XDZdQvaU8LeIfx41Ug3Mx_tkRWa-XYWt7eRGgS7tvkh-IkjeK3L0VYn95hjTdv_OYg_lTg"><img src="https://lh5.googleusercontent.com/m-xSF7rGrlqOZNEKfC1wbMDPyVy2I2uOha6iJyDk0KcULB4V92yiR7quOvXu5jTdvWEk7TOrPf-KHF8OwQ5HPVRaho-a0F3_xp6SNWIIb_Vp1O2U4Mg9-Ml_XDZdQvaU8LeIfx41Ug3Mx_tkRWa-XYWt7eRGgS7tvkh-IkjeK3L0VYn95hjTdv_OYg_lTg"/></a></figure><p id="c6b56afb-3562-4ce0-ad3c-aeefc3f769ac" class="">
+</p><ul id="3c4fba8a-efe8-45cf-9c87-cf26f77a1387" class="bulleted-list"><li style="list-style-type:disc"><strong>De-Activate:</strong> If you want to delete a rule, click De-Activate, and the rule will disappear from your Recotap dashboard.</li></ul><p id="5f4cb384-09c1-4095-8b03-96870b77fcb2" class="">
+</p><figure id="506b7f31-4a91-4d4d-9058-66215ee9b614" class="image"><a href="https://lh6.googleusercontent.com/EFXSpOX8kCbXxWPfeES1qaRM8Z0ePUkjd6tPDtNTJ_qvQAmRJYh5wuNW0FjY4CbzWIEsrEN8-PsLpxKAlcZRcL26X8VNoUVRyfhEOqLyTOoontfTRpMKrX1XhP5Z38JFklaCCrN5tmVCpbd1GwhoO_grvd4aFGkbflxV884Y4drX-rhiu3zbcqk0z9M1Aw"><img src="https://lh6.googleusercontent.com/EFXSpOX8kCbXxWPfeES1qaRM8Z0ePUkjd6tPDtNTJ_qvQAmRJYh5wuNW0FjY4CbzWIEsrEN8-PsLpxKAlcZRcL26X8VNoUVRyfhEOqLyTOoontfTRpMKrX1XhP5Z38JFklaCCrN5tmVCpbd1GwhoO_grvd4aFGkbflxV884Y4drX-rhiu3zbcqk0z9M1Aw"/></a></figure><p id="9890614a-bba0-4a81-94bc-9d4e7d993117" class="">
+</p><h3 id="6a7fe32c-2472-484e-8b78-9ac54c9e9ce5" class="">F) <strong>How To Export Leads Insights From Recotap Into Salesforce?</strong></h3><p id="1222349c-d8ce-4ec2-83c4-65fde061aba8" class="">Recotap lets you export the Engagement Score of your leads along with the Last Engagement Date to Salesforce.</p><p id="856b1894-c443-47d6-8267-52b4a26dd03c" class="">The setting for exporting the Engagement Score and Last Engagement Date of your leads to Salesforce is enabled by default.</p><p id="37b994c1-46cb-4d7b-86ef-4df47ca172f9" class="">
+</p><figure id="7ca9b5ac-7600-46f4-a6a7-4c5126e211ff" class="image"><a href="https://lh6.googleusercontent.com/41BUKsJH5qI3YEy0PRY6uW1yFvmjB3kYufWjW3WfqUidP0p-ArF2e30UUeq9upfbtCY46l4AU_ASJBe9PflvOhpRA8yhlMrMJ1LuITGzCMnVAoZxoKDU-ONBIF3DqjvUUR-brM8hqQwHKlZRzM4pWRasV6zvgRi7SsdH2_xZkVEN-R42mXMolSTseR6qZQ"><img src="https://lh6.googleusercontent.com/41BUKsJH5qI3YEy0PRY6uW1yFvmjB3kYufWjW3WfqUidP0p-ArF2e30UUeq9upfbtCY46l4AU_ASJBe9PflvOhpRA8yhlMrMJ1LuITGzCMnVAoZxoKDU-ONBIF3DqjvUUR-brM8hqQwHKlZRzM4pWRasV6zvgRi7SsdH2_xZkVEN-R42mXMolSTseR6qZQ"/></a></figure><p id="90ab2ff2-f288-4d9f-b04b-0b54e80ff025" class="">
+</p><p id="3340904d-d1cf-4ec8-b67f-c27901344ba9" class="">Select “Disabled” from the top right corner if you wish to disable this setting. The Export Leads Insights section will become inactive.</p><p id="d8023020-e8ba-4e6c-8dc7-521e71daa589" class="">
+</p><figure id="63242d83-f28c-4071-b2f9-a627f0265c26" class="image"><a href="https://lh5.googleusercontent.com/XP3af2aJ-8pLgbi1AQlmku758_uCZTkFQP5vS8D1fIGW6HNclSHGoR8FfPuho08TZD5RxpbLiOB_nyXcmFkc_anHU-9w8NlQ4Jb7fxo4-VBBj6AlrK3-qDK20aiabg8pbPFCuam9awqUJBBVMnFf-PvdalG8NzC_DCgKGxGmuvdkvqpjDFesWWL_LUGemQ"><img src="https://lh5.googleusercontent.com/XP3af2aJ-8pLgbi1AQlmku758_uCZTkFQP5vS8D1fIGW6HNclSHGoR8FfPuho08TZD5RxpbLiOB_nyXcmFkc_anHU-9w8NlQ4Jb7fxo4-VBBj6AlrK3-qDK20aiabg8pbPFCuam9awqUJBBVMnFf-PvdalG8NzC_DCgKGxGmuvdkvqpjDFesWWL_LUGemQ"/></a></figure><p id="f04b9494-1cde-4d4c-8013-d8f2893484cc" class="">
+</p><h3 id="b9ed1add-9aa3-40b2-bd9e-52db96e851b3" class="">G) <strong>How To Import Accounts From Salesforce To Recotap?</strong></h3><p id="85f51585-1c68-49ca-bdc9-ac7d3c744a62" class="">You can import your Salesforce accounts into Recotap by adding a rule.</p><p id="2607cdba-d7a2-43eb-a924-abc26235460a" class=""><strong>Step 1: </strong>Select “Salesforce account list” in the ADD RULE box. You can select the account list(s) from the drop-down menu which you want to add in Recotap.</p><p id="72d60354-8ce2-435a-9bf2-ad07b9fc5369" class="">
+</p><figure id="574f7832-5ff7-4e77-bfb1-20a833312a70" class="image"><a href="https://lh6.googleusercontent.com/GMxZhrRaheXS1x80l_SkLdhl1FWy0XbyPy-9dtvL4NgIbjCxOVJdaYuaWPgxIe_ZO8MhU8WELc_Kskpf74qnSV2XC5YNdk5gLRojviJL-9CVUGGC-aXtWALMEHBlKtzFlcbjUf5388rmzBdBUX0HXM0uN3JQtEhN-r8pEJUINpyRkl7s2ADd_9NH2WbJtw"><img src="https://lh6.googleusercontent.com/GMxZhrRaheXS1x80l_SkLdhl1FWy0XbyPy-9dtvL4NgIbjCxOVJdaYuaWPgxIe_ZO8MhU8WELc_Kskpf74qnSV2XC5YNdk5gLRojviJL-9CVUGGC-aXtWALMEHBlKtzFlcbjUf5388rmzBdBUX0HXM0uN3JQtEhN-r8pEJUINpyRkl7s2ADd_9NH2WbJtw"/></a></figure><p id="41214307-0f0a-4573-9671-18577d2a7901" class="">
+</p><p id="6a759f52-a37b-448e-8e55-9afe77ef5764" class=""><strong>Step 2: </strong>Select a destination in Recotap from “Account Only,” “New Segment,” or “Existing Segment” and click “Save.”</p><p id="9e2487fc-95be-4148-9c3e-c8f342fa8c3b" class="">
+</p><figure id="b95e9b9f-a389-483b-add7-ba73d3eba02e" class="image"><a href="https://lh4.googleusercontent.com/LEapxgRl9c7HVo8Rz68FG2ZnbUPoliRu8oBPbFYXtLS4tRN5P25-Z6TEq_IDPxpFtFkHlaCXUHM0ewGuUQtdZY24LVpwtwevMnCa4mlaW8w24XPj4OxvRNEVN4NE_4ZLE1rEfKyk4D6Pg0Vyf6ncmfqCgViFaNPa3ajaSmDiURYtma8Mn4xWcKq_R2wZvQ"><img src="https://lh4.googleusercontent.com/LEapxgRl9c7HVo8Rz68FG2ZnbUPoliRu8oBPbFYXtLS4tRN5P25-Z6TEq_IDPxpFtFkHlaCXUHM0ewGuUQtdZY24LVpwtwevMnCa4mlaW8w24XPj4OxvRNEVN4NE_4ZLE1rEfKyk4D6Pg0Vyf6ncmfqCgViFaNPa3ajaSmDiURYtma8Mn4xWcKq_R2wZvQ"/></a></figure><p id="3bd57066-de9d-46e5-a7de-052a6bd8ae8e" class="">
+</p><ul id="2870b528-3118-44ea-a1a0-e506ea851021" class="bulleted-list"><li style="list-style-type:disc">Choose Accounts Only when you wish to import account list(s) generically into Recotap.</li></ul><ul id="db3c01f7-e97b-4f36-abbd-98e359f6c1e3" class="bulleted-list"><li style="list-style-type:disc">Choose “New Segment” if you want to import your accounts into a new Account Based Static or Audience Segment. If you select “New Segment” as the destination, you will have to create a new segment. Click “Name your segment” to create a new segment. Add the name of the segment you wish to create and click “Save.” A new segment will be created, and your account list(s) will be imported into the segment you just created.</li></ul><p id="23270780-dc33-4e82-bc02-ae993dfc5f61" class="">
+</p><figure id="a47dc117-714e-4c2b-b08b-0cdf14a19bc0" class="image"><a href="https://lh4.googleusercontent.com/U-fwGWMDsfV9XeOjf4UhPBkcLY6TjlIKsTqulOJwiHrMNQSeV4Rwaid_NVXyiN79iDSfO12OWbUT50bTt2baYYEqMtAi6moK8vQkFxKVCdVrbaz03psCWUYtR09J4iGUg4reR-yByYmBlHUJsHdphqgC5jo0h8bxPiptQpyESN1MuZFrHhgQppYUDIafug"><img src="https://lh4.googleusercontent.com/U-fwGWMDsfV9XeOjf4UhPBkcLY6TjlIKsTqulOJwiHrMNQSeV4Rwaid_NVXyiN79iDSfO12OWbUT50bTt2baYYEqMtAi6moK8vQkFxKVCdVrbaz03psCWUYtR09J4iGUg4reR-yByYmBlHUJsHdphqgC5jo0h8bxPiptQpyESN1MuZFrHhgQppYUDIafug"/></a></figure><p id="f0f2cd6c-e0f8-4b80-ba47-7df0febcaef4" class="">
+</p><ul id="b3a5a0bf-b7ce-4142-9ba7-990c1fa83172" class="bulleted-list"><li style="list-style-type:disc">Choose “Existing Segment” if you already have an existing Account Based Static or Audience Segment created in Recotap and wish to import accounts in any of them. If you select “Existing Segment” as the destination, you will have to select an existing segment to import your account list(s). Click “Select Field” and choose the segment from the drop-down menu you want to import the account list(s). Click “Save.”</li></ul><p id="8a2f8ede-955b-4598-97be-9607869400da" class="">
+</p><figure id="20730ea1-1f86-4b73-aa7a-66c4c8984142" class="image"><a href="https://lh4.googleusercontent.com/YtNTKWazaNTsOgUujnG-IYjGqL7Ysep57afcnCs9RJIR0MwFABC18oqF9ChpZylSXcfLFsL-FqUZdqAk7gqMKxXM-rd36IZq9BUz6hq_T15ay6AlMzdR0NDVdB3v695SarXQ2-QVL5PHDrpm30vPWC6EWyv7-D5_z3cwGDlb6_xvMuMlj8kNzcpEuJDn-w"><img src="https://lh4.googleusercontent.com/YtNTKWazaNTsOgUujnG-IYjGqL7Ysep57afcnCs9RJIR0MwFABC18oqF9ChpZylSXcfLFsL-FqUZdqAk7gqMKxXM-rd36IZq9BUz6hq_T15ay6AlMzdR0NDVdB3v695SarXQ2-QVL5PHDrpm30vPWC6EWyv7-D5_z3cwGDlb6_xvMuMlj8kNzcpEuJDn-w"/></a></figure><p id="dd9a53a7-ecdb-4a2e-a2e2-dff4ea66c019" class=""><em><strong>Note: If you cannot see the Salesforce account list(s), it might be because you don’t have permission to view them. In that case, you may ask your Salesforce administrator for the required permissions.</strong></em></p><h3 id="7750963e-da1e-4059-8a5a-742eacdc667a" class="">H) <strong>Actions That Can Be Taken On A Rule</strong></h3><p id="861138ff-d517-4bcf-8524-ad535f21b37e" class="">Hover over the three-dot menu beside a Source or Destination in a Rule. You will get two options:</p><figure id="d710c9a0-0956-4852-8f66-5f1ec18d1d04" class="image"><a href="https://lh6.googleusercontent.com/7jjZPepb-jEgDRa4P1NkKk-RUhenI55DXyjZRjsiOV_sAV4VSZDrOAsRYWYI0Zg6xMijyjIDMbi2189LNrg9PGr4iacaYNGXyuKK1Xc0b_D7AJqJbbicjDBKnEUlL2Dz6BqzOogSzVyJ6XBf3PJaIIIqPLnMyNA205MBIochE-87oPnUr2-8-QauiXDMpw"><img src="https://lh6.googleusercontent.com/7jjZPepb-jEgDRa4P1NkKk-RUhenI55DXyjZRjsiOV_sAV4VSZDrOAsRYWYI0Zg6xMijyjIDMbi2189LNrg9PGr4iacaYNGXyuKK1Xc0b_D7AJqJbbicjDBKnEUlL2Dz6BqzOogSzVyJ6XBf3PJaIIIqPLnMyNA205MBIochE-87oPnUr2-8-QauiXDMpw"/></a></figure><p id="717e943f-b418-4c43-b3cb-71d5ab766fcd" class="">
+</p><ul id="d2ec233b-3ed2-44f7-a16e-ecdbb9ec4322" class="bulleted-list"><li style="list-style-type:disc"><strong>Edit:</strong> If you want to edit a rule, click Edit. Now you can either add a new account list(s) or delete an account list(s). After making the changes, click “Update.”</li></ul><p id="a0ab8be2-e9a2-4532-a756-9322a796fedc" class="">
+</p><figure id="e48e88ef-7059-4cff-ba16-425da17ba9d5" class="image"><a href="https://lh5.googleusercontent.com/tUJBLY3GgSGv_IHt-ceNbl218wk94xUXyQpFkm48m4fMI3j1-QEVxVP-j89efrpPja9Yl_WggteojhfOXy-qdp0tOdXlsOQvj_m33xkdzWI758jEq_up3YIA1SLWVFUeXxPusbz6xTZEtfonoW-gtBK9IkpZUkGBC01bi6_1jkqDsKMVMN8_bbMyhrM4xQ"><img src="https://lh5.googleusercontent.com/tUJBLY3GgSGv_IHt-ceNbl218wk94xUXyQpFkm48m4fMI3j1-QEVxVP-j89efrpPja9Yl_WggteojhfOXy-qdp0tOdXlsOQvj_m33xkdzWI758jEq_up3YIA1SLWVFUeXxPusbz6xTZEtfonoW-gtBK9IkpZUkGBC01bi6_1jkqDsKMVMN8_bbMyhrM4xQ"/></a></figure><p id="1024067c-9c95-4648-8bec-f1a55d480f2b" class="">
+</p><ul id="40f73309-d583-407e-9256-2a8fe781bbdc" class="bulleted-list"><li style="list-style-type:disc"><strong>De-Activate:</strong> If you want to delete a rule, click De-Activate, and the rule will disappear from your Recotap dashboard.</li></ul><p id="1ab7694d-d878-461b-987e-cabe2788e0b8" class="">
+</p><figure id="66165f44-6b13-4441-8a56-5dd75750302f" class="image"><a href="https://lh4.googleusercontent.com/rKMcy0PFHwhRojhEGUP2jn3lu9gd7t_8eyKleRrfZGdt9lVP3vJ3Ga5HlvUwlUVfqqBgiS8HcvvnArXci1d-I_f0eZ5G0cLb86agIjbROLJw1Zi1X3PChlckZhn6e3dE98Zu5xkpwUmdLJKZJPn1j-p_8uqqC-8gGbhb5y6V5ptc6uNB4n3wLfO1AMOUZQ"><img src="https://lh4.googleusercontent.com/rKMcy0PFHwhRojhEGUP2jn3lu9gd7t_8eyKleRrfZGdt9lVP3vJ3Ga5HlvUwlUVfqqBgiS8HcvvnArXci1d-I_f0eZ5G0cLb86agIjbROLJw1Zi1X3PChlckZhn6e3dE98Zu5xkpwUmdLJKZJPn1j-p_8uqqC-8gGbhb5y6V5ptc6uNB4n3wLfO1AMOUZQ"/></a></figure><p id="f5445ec7-1ae1-40bf-8ebc-cea75712f81f" class="">
+</p><h3 id="24e98f08-167c-4652-b117-7c048efdac1c" class="">I) <strong>How To Export Accounts Insights From Recotap Into Salesforce?</strong></h3><p id="1dba4c61-f6e4-4c3c-adda-4b7816e578cd" class="">Recotap lets you export the Engagement Score of your accounts along with the Last Engagement Date to Salesforce.</p><p id="51d28558-b660-43b0-922d-76e348543bba" class="">The setting for exporting the Engagement Score and Last Engagement Date of your accounts to Salesforce is enabled by default.</p><figure id="af463038-fefa-47db-b876-548e2225371e" class="image"><a href="https://lh5.googleusercontent.com/6WOZ4NuIoXU7EOSCZXUp_uMb97kttIdYjhIx_RwfLZEHzGabAT1iH9ZRwKosd8gH0BQLD9rqZWNAAsU0q58YXcNsntyPr0qMQh1RScVPtCMvz4kNYkd3IV6s9ltMGQaAU9WPrs0_CeVZG0eJZKIq46ZhMg6l4lRrcAwmCnL_IlgzAqOAiaXjc4F9L-MRDw"><img src="https://lh5.googleusercontent.com/6WOZ4NuIoXU7EOSCZXUp_uMb97kttIdYjhIx_RwfLZEHzGabAT1iH9ZRwKosd8gH0BQLD9rqZWNAAsU0q58YXcNsntyPr0qMQh1RScVPtCMvz4kNYkd3IV6s9ltMGQaAU9WPrs0_CeVZG0eJZKIq46ZhMg6l4lRrcAwmCnL_IlgzAqOAiaXjc4F9L-MRDw"/></a></figure><p id="79a4bea0-b668-4da0-9036-8b8ac4605606" class="">Select “Disabled” from the top right corner if you wish to disable this setting. The Export Account Insights section will become inactive.</p><figure id="3251cca0-2150-4c13-83a7-b67efa357892" class="image"><a href="https://lh6.googleusercontent.com/XB5EgTK8CZOuuFF6QEmUKSh5zZfuU_RnR-JluLytzVAS6DkJYvj72I_OgYs3HJhhnU6NnRRakqoW0Hx_9aDVUbmUarpbHRndrPZG_0LecdORPtguSf-gnuemQuSQfUJqwcf2mpiS70ua1Kf2SUGLJ64pdaxzKz-fZOg80n_zWVsHkBQ7cWfXgtKbjsVg5Q"><img src="https://lh6.googleusercontent.com/XB5EgTK8CZOuuFF6QEmUKSh5zZfuU_RnR-JluLytzVAS6DkJYvj72I_OgYs3HJhhnU6NnRRakqoW0Hx_9aDVUbmUarpbHRndrPZG_0LecdORPtguSf-gnuemQuSQfUJqwcf2mpiS70ua1Kf2SUGLJ64pdaxzKz-fZOg80n_zWVsHkBQ7cWfXgtKbjsVg5Q"/></a></figure><p id="8f58ba1b-a836-44c9-9698-5d2a45f58c99" class="">
+</p><h3 id="e6d6b755-3e12-48e5-ade5-11cf25d23d26" class="">2. Field Mapping</h3><p id="de274dbf-0a7e-4436-955b-314e6081be7b" class="">Field mapping lets you configure which fields in Salesforce map to which field in Recotap. Only the fields you select to map will be populated from your Salesforce account to Recotap.</p><p id="4f1a1a51-9da9-4e0f-8d70-4905af8329d7" class="">Select “Field Mapping” beside the “Settings” option from the top menu. Now you will be taken to the Field Mapping screen in Recotap.</p><figure id="5626b761-40ce-4d94-8a41-be2b7e1ec00d" class="image"><a href="https://lh4.googleusercontent.com/7ypE-1_-JtG0EeI7UkSFDdjH6GONDFAB_S43k3s3M7pGksjgCwiYKuYK0YdWIJ7qCVTOW0_CfHVXnZCXwrbFMipWScyWmqO0QXCn-FajkTZm6Xzg60ojG3Y63mKHjYKoblJU3gtgG1b2RmlI-HeAn1R_1baM0vxRgsP7uruFwbXYPzWJDRlpzlUqgtFTIQ"><img src="https://lh4.googleusercontent.com/7ypE-1_-JtG0EeI7UkSFDdjH6GONDFAB_S43k3s3M7pGksjgCwiYKuYK0YdWIJ7qCVTOW0_CfHVXnZCXwrbFMipWScyWmqO0QXCn-FajkTZm6Xzg60ojG3Y63mKHjYKoblJU3gtgG1b2RmlI-HeAn1R_1baM0vxRgsP7uruFwbXYPzWJDRlpzlUqgtFTIQ"/></a></figure><h3 id="15f0b39f-ef48-425d-b894-15ce482af90f" class="">A) <strong>How To Map A Field?</strong></h3><p id="f8989a88-25d6-4fef-9bd4-b6945b8cddb8" class=""><strong>Step 1: </strong>Click on the Select Field drop-down. Select the appropriate field you wish to map from the drop-down menu.</p><p id="8f973a5f-54e6-4fe7-a61d-937c8e8cf936" class="">
+</p><figure id="0092ce4d-ca02-49bf-b15c-821f259dd093" class="image"><a href="https://lh6.googleusercontent.com/7WKCTVcfuGpDhP8JGbzXg8es5RJG-8YSkX-M7GdN8VfgoWzyWyme4a3F2aWKa4t_0E0kNsHoEW69mNP-fgA6gbpslhfwoR9k_0c3HWHsXvBIqtOHJ9F6CJ_67ygiNSKC96c-zUq2S5EafcR2zI6BNXelRberetTYbISeZuo1260CzeLB_lIPA3kWqbKlAw"><img src="https://lh6.googleusercontent.com/7WKCTVcfuGpDhP8JGbzXg8es5RJG-8YSkX-M7GdN8VfgoWzyWyme4a3F2aWKa4t_0E0kNsHoEW69mNP-fgA6gbpslhfwoR9k_0c3HWHsXvBIqtOHJ9F6CJ_67ygiNSKC96c-zUq2S5EafcR2zI6BNXelRberetTYbISeZuo1260CzeLB_lIPA3kWqbKlAw"/></a></figure><p id="997835ef-72c0-4b74-921c-c3fed5108d18" class="">
+</p><p id="29b3f83f-25ce-4288-a608-5876044daeeb" class=""><strong>Step 2: </strong>Select “Update.”</p><p id="52dcfcfe-98f2-40d8-bac2-f4d64b367622" class="">
+</p><figure id="b1cd684d-7ce4-4a75-b2aa-45a3cdac9bf8" class="image"><a href="https://lh4.googleusercontent.com/v9-XXDs5BYhTfgZAbdAbQ8AU8Uq7BRb9Gw0RgXj877CyKlaMt3epYM0S5rke59e_yiJRiHg8CYOgW7hne_uKRmw5f9QoBA3fcaBiGwV7OTWxqSnWa9dlL-JyNOZAinSSxdXCWzZg9nWEKwYONryooJ2f0WsrNs7VW-9jtJPtIrwaSIJtRSWMACjoNPulxQ"><img src="https://lh4.googleusercontent.com/v9-XXDs5BYhTfgZAbdAbQ8AU8Uq7BRb9Gw0RgXj877CyKlaMt3epYM0S5rke59e_yiJRiHg8CYOgW7hne_uKRmw5f9QoBA3fcaBiGwV7OTWxqSnWa9dlL-JyNOZAinSSxdXCWzZg9nWEKwYONryooJ2f0WsrNs7VW-9jtJPtIrwaSIJtRSWMACjoNPulxQ"/></a></figure><p id="01b8fdb8-e056-404f-b3a9-b51308cd4f3c" class="">
+</p><p id="4ae50bd9-548b-4300-ac4a-f050c1f2421f" class=""><strong>Note:</strong></p><ul id="aa23f1c8-1fe6-433a-b6fa-faadc035dc7f" class="bulleted-list"><li style="list-style-type:disc">The Email field in People Sync and Lead Sync and Domain field in Account Sync are mapped by default.</li></ul><ul id="99f7eddd-0a8f-4cb7-91bb-fae768590bc2" class="bulleted-list"><li style="list-style-type:disc">If the Email of a particular People or Lead is not filled in your Salesforce account, then that People or Lead is not imported in Recotap.</li></ul><ul id="4c05a613-f5fa-4769-aaf9-ee70c2194e45" class="bulleted-list"><li style="list-style-type:disc">Similarly, if the Website of a particular Account is not filled in your Salesforce account, then that Account is not imported in Recotap.</li></ul><p id="51550e56-e1f7-4d94-9421-aa806e3ce59c" class="">
+</p><p id="3454d9b6-9232-4065-a731-277602849184" class="">
+</p></div></article></body></html>

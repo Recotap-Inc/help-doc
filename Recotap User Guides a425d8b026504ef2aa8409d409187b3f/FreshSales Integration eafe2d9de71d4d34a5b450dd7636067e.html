@@ -1,0 +1,678 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>FreshSales Integration</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="eafe2d9d-e71d-4d34-a5b4-50dd7636067e" class="page serif"><header><img class="page-cover-image" src="Marketo%20Integration%202719e292242c4760a749d2455e5f1e72/Recotap_Knowledgebase_cover_(2).png" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="FreshSales%20Integration%20eafe2d9de71d4d34a5b450dd7636067e/output-onlinegiftools.gif"/></div><h1 class="page-title">FreshSales Integration</h1></header><div class="page-body"><p id="81fe548c-3dc9-4027-90d1-bbc2e075ca9b" class="">
+</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="5b692f3a-5c2f-4bcf-bf4d-dfdb21b415d8"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">The bi-directional integration with FreshSales enables you to import <strong><mark class="highlight-orange">Contact</mark></strong>/<strong><mark class="highlight-orange">Account</mark></strong> data into Recotap as well as export <strong><mark class="highlight-orange">Contact &amp; Account</mark></strong> insights to FreshSales. </div></figure><nav id="3cc8c751-b166-4416-abca-2627c94811c5" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#bc16cac6-ee67-4b0d-84e3-f3aeea0533ad">FreshSales Authentication </a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#58e04e72-d418-48ee-a79f-bd371212b71b">Settings &amp; Configuration</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1e8920c2-ac47-4552-8784-acc97ee9a0e0">Configuration rules highlights </a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#7de8dc30-94a4-425b-bb7c-4d1e7b18281a">Contact Sync</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#7428d20a-ca40-403f-ab7c-99a30e8526d7">New Import Rules</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#b457897c-1d54-449c-8c9e-77a61084384e"> Edit  Import Rules</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#0f9daf9f-320a-4548-93ee-5ac100d8fd80">Export Contact Insights</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#c5af3155-5cb3-49bf-bf7f-ffb136df26c2">Account Sync</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#573be0b3-c46a-4a7f-aff6-0428a7f50ea6">New Import Rules</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#f8ef848d-ebd7-4f35-9767-57d12d9105ff">Edit Import Rules</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#f223d5bd-c26b-4306-826a-81424fbd5842">Export Account Insight</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#3d3b87f3-3898-41cc-9258-2c2a891537e2">Field Mappings </a></div></nav><h2 id="bc16cac6-ee67-4b0d-84e3-f3aeea0533ad" class="">FreshSales Authentication </h2><p id="00c23570-db86-4b43-8663-b3cee172acdb" class="">Integration of FreshSales and Recotap will enable one-way or two-way data sync between the two systems. In order to integrate FreshSales and Recotap, please follow the steps below:</p><ul id="7874c7cd-5dd9-4b2e-9fd4-97e2fdb10759" class="bulleted-list"><li style="list-style-type:disc">Login to your Recotap account, in the Client panel, navigate to the <strong>Integration</strong> screen</li></ul><figure id="3bda4ec6-3894-4594-bc98-9ee22412d3be" class="image"><a href="Marketo%20Integration%202719e292242c4760a749d2455e5f1e72/Freshsales.png"><img style="width:624px" src="Marketo%20Integration%202719e292242c4760a749d2455e5f1e72/Freshsales.png"/></a></figure><p id="b967cb36-2137-4814-bac9-1679e714b80b" class="">
+</p><ul id="162f631e-5354-40bc-83e1-f61006d42a1c" class="bulleted-list"><li style="list-style-type:disc">You will see a list of CRM software that can be integrated with Recotap.  Click the<strong> Install </strong>button under the FreshSales card.</li></ul><ul id="d20e8f5f-3c3a-41ac-a5a7-1e298bc54ae1" class="bulleted-list"><li style="list-style-type:disc">Enter the API key &amp; API URL from your FreshSales account &amp; click on <strong>Verify</strong>.<figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="8f0908e3-0d7b-4218-b1b0-9cecf9faa9e8"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">The API key and the API URL can be found from your FreshSales, please follow the steps listed <a href="https://crmsupport.freshworks.com/support/solutions/articles/50000002503-how-to-find-my-api-key-">here</a> or contact your Fresh Sales administrator. </div></figure><figure id="f03b24f9-54fa-4950-9c48-94f01132ab76" class="image"><a href="FreshSales%20Integration%20eafe2d9de71d4d34a5b450dd7636067e/freshsales_1.png"><img style="width:672px" src="FreshSales%20Integration%20eafe2d9de71d4d34a5b450dd7636067e/freshsales_1.png"/></a></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="b875fffc-3961-41b1-9b30-5a9aff67b64a"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%"><mark class="highlight-orange"><strong>Note: While entering the API URL, please append crm/sales to the end of the URL before clicking the verify button.</strong></mark></div></figure></li></ul><p id="3f25b892-0a6d-48c0-aaec-031dd32a3faa" class="">
+</p><p id="9cdb1a0f-342e-4beb-ba1a-b80e2ef57879" class="">
+</p><p id="feed077e-7dd0-4a8f-b904-13a02a2e265c" class="">After completing the above steps, you will establish a connection between FreshSales and Recotap. </p><figure id="c95465e9-df01-4724-8b95-98640c803b26" class="image"><a href="FreshSales%20Integration%20eafe2d9de71d4d34a5b450dd7636067e/photo_2021-09-15_16-09-52.jpg"><img style="width:1267px" src="FreshSales%20Integration%20eafe2d9de71d4d34a5b450dd7636067e/photo_2021-09-15_16-09-52.jpg"/></a></figure><h2 id="58e04e72-d418-48ee-a79f-bd371212b71b" class="">Settings &amp; Configuration</h2><p id="8fd6b412-f405-4dc1-80b1-24852cfe1a69" class="">Once the FreshSales API key &amp; API URL is verified,  the sections to configure various rules for importing and exporting data will be visible.</p><p id="2d95a4a9-3fe5-4576-8faa-c0a0a3100318" class="">The rules so configured will let you import relevant Accounts, and the associated Contacts, into Recotap to create  Audience segments. You can also export Recotap generated insights like engagement score and last engagement date to FreshSales from Recotap. </p><h3 id="1e8920c2-ac47-4552-8784-acc97ee9a0e0" class="">Configuration rules highlights </h3><ul id="5056044b-d918-48d5-a26e-d86e4e706aad" class="bulleted-list"><li style="list-style-type:disc">The  <strong>Settings  </strong>tab<strong> </strong>hosts<strong> </strong>all<strong> </strong>the rules to import and export data From and To to FreshSales</li></ul><ul id="f359760c-2c19-458d-ad79-d83545c09de7" class="bulleted-list"><li style="list-style-type:disc">The <strong>Field Mapping</strong> tab enables you to map individual fields between FreshSales and Recotap. <strong> </strong></li></ul><ul id="31b2d68d-be2d-473b-8a85-04089fb54056" class="bulleted-list"><li style="list-style-type:disc">Data from the Source system (FreshSales)  is imported using the Contact or Account list entity</li></ul><h2 id="7de8dc30-94a4-425b-bb7c-4d1e7b18281a" class="">Contact Sync</h2><p id="ed822af5-34ed-4c29-ac40-78f366dd8bc3" class="">The Recotap- FreshSales integration allows to seamlessly import Contacts. If the Contacts rules are configured, Recotap will import FreshSales Contact lists to Recotap to create Audience Segment(s).  </p><h3 id="7428d20a-ca40-403f-ab7c-99a30e8526d7" class="">New Import Rules</h3><p id="e0c00f4c-0e4d-42d4-8107-c2ce216f6f33" class="">All the previously configured import rules for the Contacts will be listed with their source and destination details in a tabular format. <div class="indented"><figure id="9f970430-a6d8-4c93-949f-551a9c68d7c2" class="image"><a href="FreshSales%20Integration%20eafe2d9de71d4d34a5b450dd7636067e/Untitled.png"><img style="width:1190px" src="FreshSales%20Integration%20eafe2d9de71d4d34a5b450dd7636067e/Untitled.png"/></a></figure><ul id="347b4ce1-3a52-4be5-a4ba-4677172ae06e" class="bulleted-list"><li style="list-style-type:disc">To add a new rule, click on <strong>Add Rule </strong>button which will open the configuration form.</li></ul><ul id="f4ea982f-4be1-44c3-8edd-c83ed82c1aa0" class="bulleted-list"><li style="list-style-type:disc">To Edit an existing rule, click the 3 dots menu, the configuration form will open with the previously added rule information. </li></ul><ul id="a798a2e5-2d14-401c-a119-192bf6ab1272" class="bulleted-list"><li style="list-style-type:disc">To search for an existing rule, enter the name of the source or rule in the search bar placed at the top-left corner of the table. </li></ul></div></p><p id="1ca7652e-14c1-4938-abbb-cfd16a8acdf7" class="">If you are adding a rule for the first time you will be taken directly to the configuration form.  It allows you to add a new rule to import contacts from FreshSales into Recotap. It is an inbound flow of data from FreshSales to Recotap. </p><figure id="842cc744-f2c5-472b-8078-e35ab106a7df" class="image"><a href="FreshSales%20Integration%20eafe2d9de71d4d34a5b450dd7636067e/photo_2021-09-15_16-13-06.jpg"><img style="width:1257px" src="FreshSales%20Integration%20eafe2d9de71d4d34a5b450dd7636067e/photo_2021-09-15_16-13-06.jpg"/></a></figure><ul id="3b102f3b-6407-417a-9a42-c9cbe2c05416" class="bulleted-list"><li style="list-style-type:disc">The select box <strong>Source: FreshSales Contact Lists </strong>allows you to choose one or more Contact lists created in your FreshSales instance.</li></ul><ul id="664f8dcf-1bd5-4341-9c77-dcbe51ac30c3" class="bulleted-list"><li style="list-style-type:disc">To choose a contact list, click on the FreshSales <strong>contact list search option</strong> and select the relevant list.</li></ul><ul id="dae633f6-44af-479a-8e28-71618d5535db" class="bulleted-list"><li style="list-style-type:disc">The <strong>Destination: Recotap</strong> section determines how the data imported from FreshSales is processed  <ul id="c087a599-8c95-45a4-a008-6510395ada00" class="bulleted-list"><li style="list-style-type:circle">If you select the option <em>Contacts Only</em>, Contacts in the FreshSales list are imported and created as Contacts in Recotap without them being associated with any Audience segment.</li></ul><ul id="2881d52f-6c30-40bc-b5e4-3753ec059be1" class="bulleted-list"><li style="list-style-type:circle">If you select the option <em>New Segment</em>, Contacts in the FreshSales list are imported and will be associated with a new Audience segment. Please provide the name of the audience in the text field that appears below.<figure id="a69aafcd-7f1b-4a53-9f09-a09fbdcf1953" class="image"><a href="FreshSales%20Integration%20eafe2d9de71d4d34a5b450dd7636067e/Untitled%201.png"><img style="width:1165px" src="FreshSales%20Integration%20eafe2d9de71d4d34a5b450dd7636067e/Untitled%201.png"/></a></figure></li></ul><ul id="fe8b8f39-058b-4651-bacd-b59db5e7992f" class="bulleted-list"><li style="list-style-type:circle">If you select the option  <em>Existing Segment</em>, Contacts in the FreshSales list are imported and associated with an existing Audience segment. Please select the relevant Audience segment from the drop-down.<figure id="bc5294c7-30d6-4e28-b836-d2fbdf04ab49" class="image"><a href="FreshSales%20Integration%20eafe2d9de71d4d34a5b450dd7636067e/Untitled%202.png"><img style="width:1158px" src="FreshSales%20Integration%20eafe2d9de71d4d34a5b450dd7636067e/Untitled%202.png"/></a></figure></li></ul></li></ul><ul id="2e26fa26-a9f0-41b2-8071-8068334f7757" class="bulleted-list"><li style="list-style-type:disc">Click on <strong>Save</strong> to add the new rule.</li></ul><p id="e2428388-4a68-47a2-a21b-b64c755d2441" class="">The Export Contact Insight is the outbound flow of data where, on a periodic basis, insights like engagement score and last engagement date can be shared from Recotap to FreshSales.</p><figure id="d154181b-85b2-4f4f-8493-f6457c6639b0" class="image"><a href="FreshSales%20Integration%20eafe2d9de71d4d34a5b450dd7636067e/photo_2021-09-15_16-57-55.jpg"><img style="width:1255px" src="FreshSales%20Integration%20eafe2d9de71d4d34a5b450dd7636067e/photo_2021-09-15_16-57-55.jpg"/></a></figure><ul id="f5679d7a-b5d6-4b7d-9071-f4584ce100ff" class="bulleted-list"><li style="list-style-type:disc">To allow this exchange, click on the <strong>enable</strong> button. This will allow the exchange of insights from Recotap to FreshSales. </li></ul><ul id="893a019c-6dfb-4faf-aeb4-c7fe8240e5d3" class="bulleted-list"><li style="list-style-type:disc">To prevent this exchange, click on the <strong>disabled </strong>button.</li></ul><h3 id="b457897c-1d54-449c-8c9e-77a61084384e" class=""> Edit  Import Rules</h3><p id="6c6b438c-1601-42e8-8bb4-f20573778585" class="">You can edit existing rules by following the steps below to  edit rules:</p><ul id="680d11c2-48bb-46fa-9a2f-41a0d4b33c63" class="bulleted-list"><li style="list-style-type:disc">Look for an existing rule that has to be edited from the table. </li></ul><ul id="d31e9174-1e62-4c64-a615-035ca238c0e5" class="bulleted-list"><li style="list-style-type:disc">Click on the 3 dots menu and then select the edit option. </li></ul><ul id="dee79e10-760b-479f-b27c-9fc14b9668f5" class="bulleted-list"><li style="list-style-type:disc">Identify the source list that has to be changed</li></ul><ul id="7eb51264-1f88-405f-91a9-ccf02a94c78a" class="bulleted-list"><li style="list-style-type:disc">Choose the relevant destination option and its associated details</li></ul><ul id="e2fb73b1-c554-40e9-b5b7-72f232f8a612" class="bulleted-list"><li style="list-style-type:disc">Click on the update button to save the changes. </li></ul><figure id="9ba84fb6-68f7-4b6a-9cad-c5d3c6b2f70d" class="image"><a href="FreshSales%20Integration%20eafe2d9de71d4d34a5b450dd7636067e/photo_2021-09-15_16-59-15.jpg"><img style="width:1244px" src="FreshSales%20Integration%20eafe2d9de71d4d34a5b450dd7636067e/photo_2021-09-15_16-59-15.jpg"/></a></figure><h2 id="0f9daf9f-320a-4548-93ee-5ac100d8fd80" class="">Export Contact Insights</h2><p id="5933dffe-8a99-4867-a7e5-a18964d44f22" class="">Recotap allows insights like <strong>Engagement score </strong>and<strong> last engagement date</strong> to be exported to FreshSales contact. It is an outbound flow of information from Recotap to FreshSales. </p><figure id="72e00e4d-d9c5-49d7-af8d-684cf2ca9fb4" class="image"><a href="Marketo%20Integration%202719e292242c4760a749d2455e5f1e72/Salesforce_export_contact_insight_.png"><img style="width:758px" src="Marketo%20Integration%202719e292242c4760a749d2455e5f1e72/Salesforce_export_contact_insight_.png"/></a></figure><ul id="13902952-9783-4946-bf4a-9f089c4cf4dd" class="bulleted-list"><li style="list-style-type:disc">To allow this export, select the <strong>Enabled </strong>option box. This will allow the export of insights from Recotap to Fresh Sales.</li></ul><ul id="28829343-20dc-46b1-90fd-a9b7f96e6e43" class="bulleted-list"><li style="list-style-type:disc">To prevent insight export, select <strong>disabled</strong>.</li></ul><h2 id="c5af3155-5cb3-49bf-bf7f-ffb136df26c2" class="">Account Sync</h2><p id="c23159aa-c98b-4991-b20f-45ee975b5148" class="">The Recotap - FreshSales integration allows importing of Accounts just like the Contacts. If the Account rules are enabled, Recotap can import FreshSales Account lists to Recotap to create an Audience Segment. </p><h3 id="573be0b3-c46a-4a7f-aff6-0428a7f50ea6" class="">New Import Rules</h3><p id="55faaaa8-c622-4b35-9494-a160ce48506f" class="">All the previously configured import rules for the Account import will be listed with their source and destination details. </p><figure id="dc08d968-b3b1-4a43-b139-c5d814762195" class="image"><a href="Marketo%20Integration%202719e292242c4760a749d2455e5f1e72/photo_2021-09-15_17-02-04.jpg"><img style="width:1261px" src="Marketo%20Integration%202719e292242c4760a749d2455e5f1e72/photo_2021-09-15_17-02-04.jpg"/></a></figure><p id="ab817c35-b052-4305-aa44-0f204dab9c91" class="">
+</p><ul id="adf0b062-63ed-4fd4-861d-6f54241d8cdb" class="bulleted-list"><li style="list-style-type:disc">To add a new rule, click on <strong>Add Rule </strong>button which will open the configuration form.</li></ul><ul id="7b24bed2-db54-49b8-bd5f-6c7993c5cbea" class="bulleted-list"><li style="list-style-type:disc">To Edit an existing rule, click the 3 dots menu, the configuration form will open with the previously added rule information. </li></ul><ul id="b386370e-4bd0-4f35-ac1f-4614c03572c5" class="bulleted-list"><li style="list-style-type:disc">To search for an existing rule, enter the name of the source or rule in the search bar placed at the top-left corner of the table. </li></ul><p id="906659b6-449b-434a-b030-64873d34640a" class="">If you are adding a rule for the first time you will be taken directly to the configuration form.  It allows you to add a new rule to import Account from FreshSales into Recotap. It is an inbound flow of data from FreshSales to Recotap. </p><p id="c70f9790-e1ca-4889-8be6-4163e29881d4" class="">
+</p><figure id="0a6b790a-66b3-4f7d-b111-43e0f6b111c4" class="image"><a href="FreshSales%20Integration%20eafe2d9de71d4d34a5b450dd7636067e/photo_2021-09-15_17-02-50.jpg"><img style="width:1255px" src="FreshSales%20Integration%20eafe2d9de71d4d34a5b450dd7636067e/photo_2021-09-15_17-02-50.jpg"/></a></figure><ul id="ab936299-5921-4298-bf54-3586d85965fe" class="bulleted-list"><li style="list-style-type:disc">The select box <strong>Source: FreshSales Accounts Lists </strong>allows you to choose one or more Account lists created in your FreshSales instance.</li></ul><ul id="f6c76de7-2aef-4f7c-aeb5-c7a1f4d6fc74" class="bulleted-list"><li style="list-style-type:disc">Choose relevant Account list from the multi-select list.</li></ul><ul id="55f59dee-9873-45e5-8429-74add56ab955" class="bulleted-list"><li style="list-style-type:disc">The <strong>Destination: Recotap</strong> section determines how the data imported from FreshSales is processed  <ul id="9de136b5-c8cf-4042-ae4e-8dd973b85823" class="bulleted-list"><li style="list-style-type:circle">If you select the option Accounts<em> Only</em>, Accounts in the FreshSales list are imported and created as Accounts in Recotap without them being associated with any Audience segment.</li></ul><ul id="cb94e758-a21e-4688-921d-b9d784579fc9" class="bulleted-list"><li style="list-style-type:circle">If you select the option <em>New Segment</em>, Accounts in the FreshSales list are imported and will be associated with a new Audience segment. You would be prompted to provide a name of the audience segment in the text field that appears below.</li></ul><ul id="06ffe3d8-c3c1-4dbb-b74b-3c66f38d1a7a" class="bulleted-list"><li style="list-style-type:circle">If you select the option  <em>Existing Segment</em>, Accounts in the FreshSales list are imported and associated with an existing Audience segment. You would be prompted to select the relevant Audience segment from the drop-down to enable the Association.</li></ul></li></ul><ul id="260d958c-2d87-4800-8ceb-00c53cc352f3" class="bulleted-list"><li style="list-style-type:disc">Click on <strong>Save</strong> to add the new rule.</li></ul><h3 id="f8ef848d-ebd7-4f35-9767-57d12d9105ff" class="">Edit Import Rules</h3><p id="23134b05-14d1-496a-a000-66f2718cd02d" class="">You can edit existing rules by following the steps below to  edit rules:</p><figure id="aa591f32-f4c5-48bb-a73d-e0b37f4198c8" class="image"><a href="Marketo%20Integration%202719e292242c4760a749d2455e5f1e72/photo_2021-09-15_17-02-04.jpg"><img style="width:1261px" src="Marketo%20Integration%202719e292242c4760a749d2455e5f1e72/photo_2021-09-15_17-02-04.jpg"/></a></figure><ul id="d765ac30-7f98-4d49-b9d4-80364c4d2112" class="bulleted-list"><li style="list-style-type:disc">Look for an existing rule that has to be edited from the table. </li></ul><ul id="7d3cf266-ac09-4cb6-84ff-45a397f77a4e" class="bulleted-list"><li style="list-style-type:disc">Click on the 3 dots menu and then select the edit option. You will be take  </li></ul><figure id="fa2cc351-5b13-42ff-aad5-89bff6dad2a1" class="image"><a href="FreshSales%20Integration%20eafe2d9de71d4d34a5b450dd7636067e/photo_2021-09-15_17-04-10.jpg"><img style="width:1241px" src="FreshSales%20Integration%20eafe2d9de71d4d34a5b450dd7636067e/photo_2021-09-15_17-04-10.jpg"/></a></figure><h2 id="f223d5bd-c26b-4306-826a-81424fbd5842" class="">Export Account Insight</h2><p id="674860f1-1881-453a-8922-b9274b10f360" class="">Recotap allows the insights like engagement score and last engagement date to be exchanged at the account level. It is an outbound flow of information from Recotap to FreshSales. </p><figure id="a0e761f6-9f6c-4ed9-b48d-5db82eb5a0b0" class="image"><a href="Marketo%20Integration%202719e292242c4760a749d2455e5f1e72/photo_2021-09-15_17-04-44.jpg"><img style="width:1247px" src="Marketo%20Integration%202719e292242c4760a749d2455e5f1e72/photo_2021-09-15_17-04-44.jpg"/></a></figure><ul id="7a1af82a-ca21-4bb6-8132-19d5599fcf6e" class="bulleted-list"><li style="list-style-type:disc">To allow this exchange, select <strong>enabled</strong>. This will allow the exchange of insights from Recotap to FreshSales.</li></ul><ul id="68b36bc0-55c0-4dd7-a11d-7f1374b4327c" class="bulleted-list"><li style="list-style-type:disc">To prevent this exchange, select <strong>disabled</strong>.</li></ul><h2 id="3d3b87f3-3898-41cc-9258-2c2a891537e2" class="">Field Mappings </h2><p id="ff9988b6-9c50-4546-99c8-66ed06b59151" class="">The Field mappings tab lets you map the various fields across Contacts and Accounts between the two systems. By default only mapped fields will be imported to Recotap. Hence as a one-time effort at the time of the initial configuration, the source and destination fields should be mapped. Once it&#x27;s mapped click the <strong>Update</strong> button to save the mapping.</p><figure id="e12f8bfe-cd01-42f1-b02d-9e9c46c2fd69" class="image"><a href="Marketo%20Integration%202719e292242c4760a749d2455e5f1e72/Untitled.png"><img style="width:720px" src="Marketo%20Integration%202719e292242c4760a749d2455e5f1e72/Untitled.png"/></a></figure><p id="7779d2c1-4a51-45bb-974d-2192c17fb32e" class="">
+</p><figure id="aa4eb945-ca17-4bc4-afda-b107a4070b43" class="image"><a href="Marketo%20Integration%202719e292242c4760a749d2455e5f1e72/Untitled%201.png"><img style="width:1195px" src="Marketo%20Integration%202719e292242c4760a749d2455e5f1e72/Untitled%201.png"/></a></figure><p id="1a46d702-75b8-444e-bc8b-1ebfd43062f2" class="">
+</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="27b2b6ce-263d-498b-813f-58de5d34480c"><div style="font-size:1.5em"><span class="icon">💁</span></div><div style="width:100%">If you have further questions on this integration please write to us at support@recotap.com  </div></figure><p id="9402c5c3-a9e2-417b-b7b2-f5212e451896" class="">
+</p></div></article></body></html>
